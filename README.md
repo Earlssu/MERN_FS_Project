@@ -3,13 +3,13 @@ This project is based on [The MERN Fullstack Guide](https://www.udemy.com/course
 
 ## 목차 / Table of Contents
 1. [한국어](#한국어)
-    - [강의소개](#강의소개)
-    - [강의에서 다룰 내용](#강의에서다룰내용)
-    - [학습목표](#학습목표)
+    - [강의소개](#-강의-소개)
+    - [강의에서 다룰 내용](#-강의에서-다룰-내용)
+    - [학습목표](#-학습-목표)
 2. [English](#English)
-    - [Course Description](#CourseDescription)
-    - [What Course Offers](#WhatCourseOffers)
-    - [Goal](#Goal)
+    - [Course Description](#-Course-Description)
+    - [What Course Offers](#-What-Course-Offers)
+    - [Goal](#-Goal)
 
 ## 한국어
 ### 📝 강의 소개
