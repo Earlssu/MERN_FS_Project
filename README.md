@@ -29,8 +29,14 @@ This project is based on [The MERN Fullstack Guide](https://www.udemy.com/course
 - 수많은 퀴즈와 추가 자료!
 
 ### 🎯 학습 목표 (학습하며 추가 예정)
-- React 19 버전 기반으로 코드 작성
+- React-TypeScript 기반으로 코드 작성
+- Mono-repo, Vite, pnpm 기반 프로젝트 생성
 - 기존 내용과 비슷한 서비스 플로우, 다른 내용
+
+### ❓ 왜 monorepo / TypeScript / pnpm 인가?
+- monorepo: 클라이언트와 서버를 하나의 저장소에서 통합 관리하여 구조가 명확하고 유지보수가 용이함
+- TypeScript: 정적 타입을 통해 더 안전하고 예측 가능한 코드 작성이 가능하며, 협업과 리팩토링에 유리
+- pnpm: 빠른 의존성 설치와 디스크 공간 절약, monorepo 환경과의 궁합이 뛰어나 설정이 효율적
 
 ## English
 ### 📝 Course Description
@@ -50,5 +56,11 @@ This course is taught by two instructors - Max (React.js, Node/ Express) and Man
 - Tons of quizzes and extra resources!
 
 ### 🎯 Goal (Will be edited as lecture goes)
-- FE dev based on React v19
+- FE dev based on React-TypeScript
+- Created app with Vite, pnpm (monorepo structure)
 - Similar service flow, different content
+
+### ❓ Why use monorepo / TypeScript / pnpm?
+- monorepo: Enables unified management of both client and server in a single repo, making the structure clear and maintenance easier
+- TypeScript: Offers static typing for safer and more predictable code, beneficial for collaboration and refactoring
+- pnpm: Provides fast dependency installation and disk efficiency, with excellent support for monorepo setups
