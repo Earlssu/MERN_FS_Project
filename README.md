@@ -1,9 +1,15 @@
 # MERN_FS_Project
-This project is based on [The MERN Fullstack Guide](https://www.udemy.com/course/react-nodejs-express-mongodb-the-mern-fullstack-guide/?couponCode=ST22MT240325G3) by [Maximilian Schwarzmüller](https://www.udemy.com/user/academind/), Academind and [Manuel Lorenz](https://www.udemy.com/user/manuel-lorenz/)
+This project is based on [The MERN Fullstack Guide](https://www.udemy.com/course/react-nodejs-express-mongodb-the-mern-fullstack-guide/?couponCode=ST22MT240325G3) by [Maximilian Schwarzmüller](https://www.udemy.com/user/academind/) and [Manuel Lorenz](https://www.udemy.com/user/manuel-lorenz/)
 
 ## 목차 / Table of Contents
 1. [한국어](#한국어)
+    - [강의소개](#강의소개)
+    - [강의에서 다룰 내용](#강의에서다룰내용)
+    - [학습목표](#학습목표)
 2. [English](#English)
+    - [Course Description](#CourseDescription)
+    - [What Course Offers](#WhatCourseOffers)
+    - [Goal](#Goal)
 
 ## 한국어
 ### 📝 강의 소개
@@ -22,7 +28,7 @@ This project is based on [The MERN Fullstack Guide](https://www.udemy.com/course
 - 자세한 배포 지침 - 애플리케이션을 배포하는 다양한 방법 포함
 - 수많은 퀴즈와 추가 자료!
 
-### 🎯 목표 (학습하며 추가 예정)
+### 🎯 학습 목표 (학습하며 추가 예정)
 - React 19 버전 기반으로 코드 작성
 - 기존 내용과 비슷한 서비스 플로우, 다른 내용
 
