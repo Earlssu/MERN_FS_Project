@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { GoalType } from '@/pages/landing/types.ts';
 
 const LandingPage = () => {
-  const [CourseGoals, setCourseGoals] = useState<GoalType[]>([]);
+  const [courseGoals, setCourseGoals] = useState<GoalType[]>([]);
 
   useEffect(() => {
     setCourseGoals([
@@ -26,7 +26,7 @@ const LandingPage = () => {
     <div className={'m-4'}>
       <h2 className={'text-2xl font-bold mb-2 place-self-center'}>Course Goals</h2>
       <NewGoal onAdd={handleAddNewGoal} />
-      <GoalList goals={CourseGoals} onDelete={handleDeleteGoal} />
+      <GoalList goals={courseGoals} onDelete={handleDeleteGoal} />
     </div>
   );
 };
