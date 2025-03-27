@@ -1,9 +1,17 @@
-const GoalList = () => {
+interface GoalListProps {
+  goals: { id: string; text: string }[];
+}
+
+const GoalList: React.FC<GoalListProps> = ({ goals }) => {
   return (
     <ul className={'flex flex-col gap-2'}>
-      <li className={'p-2 border rounded-sm'}>Finish the Course</li>
-      <li className={'p-2 border rounded-sm'}>Learn all about the Course Main Topic</li>
-      <li className={'p-2 border rounded-sm'}>Help other students in the Course Q&A</li>
+      {goals.map((goal) => {
+        return (
+          <li key={goal.id} className={'p-2 border rounded-sm'}>
+            {goal.text}
+          </li>
+        );
+      })}
     </ul>
   );
 };
