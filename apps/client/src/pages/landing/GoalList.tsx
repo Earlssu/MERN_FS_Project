@@ -3,7 +3,7 @@ import { Trash2 } from 'lucide-react';
 
 interface GoalListProps {
   goals: GoalType[];
-  onDelete?: (id: string) => void;
+  onDelete: (id: string) => void;
 }
 
 const GoalList: React.FC<GoalListProps> = ({ goals, onDelete }) => {

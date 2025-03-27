@@ -3,10 +3,10 @@ import { useState } from 'react';
 import { GoalType } from '@/pages/landing/types.ts';
 
 interface NewGoalProps {
-  setCourseGoals: React.Dispatch<React.SetStateAction<GoalType[]>>;
+  onAdd: (goal: GoalType) => void;
 }
 
-const NewGoal: React.FC<NewGoalProps> = ({ setCourseGoals }) => {
+const NewGoal: React.FC<NewGoalProps> = ({ onAdd }) => {
   const [enteredGoalText, setEnteredGoalText] = useState('');
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -20,7 +20,7 @@ const NewGoal: React.FC<NewGoalProps> = ({ setCourseGoals }) => {
       text: trimmed,
     };
 
-    setCourseGoals((prevGoals) => [...prevGoals, newGoal]);
+    onAdd(newGoal);
     setEnteredGoalText(''); // input 초기화
   };
 
