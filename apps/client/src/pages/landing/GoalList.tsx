@@ -1,5 +1,7 @@
+import { GoalType } from '@/pages/landing/types.ts';
+
 interface GoalListProps {
-  goals: { id: string; text: string }[];
+  goals: GoalType[];
 }
 
 const GoalList: React.FC<GoalListProps> = ({ goals }) => {
