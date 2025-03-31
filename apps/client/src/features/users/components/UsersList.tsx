@@ -9,8 +9,8 @@ const UsersList: React.FC<UsersListProps> = ({ users }) => {
   return (
     <div className={'flex flex-col gap-8'}>
       {users.length == 0 ? (
-        <div>
-          <h3 className={'text-xl mb-2 '}>No Users Found.</h3>
+        <div className={'p-8'}>
+          <h2 className={'text-2xl mb-2 place-self-center'}>No Users Found</h2>
         </div>
       ) : (
         <div>
