@@ -2,7 +2,7 @@ import UsersList from '@/features/users/components/UsersList.tsx';
 import { UserType } from '@/features/users/types/types.ts';
 
 // TODO: Delete when data is fetched
-const dummy_users: UserType[] = [
+const DUMMY_USERS: UserType[] = [
   {
     id: '001',
     name: 'Evan',
@@ -24,7 +24,7 @@ const dummy_users: UserType[] = [
 const UsersPage = () => {
   return (
     <div>
-      <UsersList users={dummy_users} />
+      <UsersList users={DUMMY_USERS} />
     </div>
   );
 };
