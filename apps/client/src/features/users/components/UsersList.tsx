@@ -16,14 +16,7 @@ const UsersList: React.FC<UsersListProps> = ({ users }) => {
         <div>
           <h2 className={'text-2xl font-bold mt-4 mx-4'}>UsersList</h2>
           {users.map((user) => {
-            return (
-              <UserItem
-                key={user.id}
-                name={user.name}
-                imageUrl={user.imageUrl ?? user.imageUrl}
-                placeCount={user.placeCount ?? 0}
-              />
-            );
+            return <UserItem key={user.id} user={user} />;
           })}
         </div>
       )}
