@@ -3,4 +3,7 @@ export type UserType = {
   name: string;
   imageUrl: string;
   placeCount: number;
+  lifeTheme: string;
+  lifeThemeUrl: string;
+  lastUpdated: string;
 };
