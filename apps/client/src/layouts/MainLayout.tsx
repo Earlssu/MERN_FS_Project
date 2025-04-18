@@ -1,10 +1,10 @@
 import { Outlet } from 'react-router-dom';
-import CommonHeader from '@/shared/components/CommonHeader.tsx';
+import MainHeader from '@/shared/components/MainHeader.tsx';
 
 const MainLayout = () => {
   return (
     <div>
-      <CommonHeader />
+      <MainHeader />
       <main>
         <Outlet />
       </main>
