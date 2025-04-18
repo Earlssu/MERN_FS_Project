@@ -5,7 +5,7 @@ interface MainHeaderLinkProps {
 
 const MainHeaderLink: React.FC<MainHeaderLinkProps> = ({ to, content }) => {
   return (
-    <li>
+    <li className={'font-bold text-lg hover:text-amber-400'}>
       <a href={to}>{content ? content : 'Link Empty'}</a>
     </li>
   );
