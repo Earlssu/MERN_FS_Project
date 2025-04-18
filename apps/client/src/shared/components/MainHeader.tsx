@@ -1,11 +1,11 @@
+import MainHeaderLink from '@/shared/components/MainHeaderLink.tsx';
+
 const MainHeader = () => {
   return (
-    <header className={'bg-black text-white'}>
-      <ul>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
+    <header className={'bg-black text-white p-4'}>
+      <ul className={'flex gap-4'}>
+        <MainHeaderLink to={'/'} content={'Home'} />
+        <MainHeaderLink to={'/users'} content={'Users'} />
       </ul>
     </header>
   );
