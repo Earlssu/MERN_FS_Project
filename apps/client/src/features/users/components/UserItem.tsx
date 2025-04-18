@@ -23,7 +23,7 @@ const UserItem: React.FC<{ user: UserItemProps }> = ({ user }) => {
         <div>방탈출 횟수: {user.placeCount}회</div>
         <div>
           인생테마:
-          <a href={user.lifeThemeUrl} className={'text-indigo-500'}>
+          <a href={user.lifeThemeUrl} className={'text-indigo-500'} target="_blank">
             {' '}
             {user.lifeTheme}
           </a>
