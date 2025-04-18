@@ -1,9 +1,10 @@
 import { Outlet } from 'react-router-dom';
+import CommonHeader from '@/shared/components/CommonHeader.tsx';
 
 const MainLayout = () => {
   return (
     <div>
-      <header className={'bg-black text-white'}>공통 헤더</header>
+      <CommonHeader />
       <main>
         <Outlet />
       </main>
