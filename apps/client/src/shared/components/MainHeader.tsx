@@ -1,10 +1,16 @@
 import MainHeaderLink from '@/shared/components/MainHeaderLink.tsx';
+import * as React from 'react';
+import { Menu } from 'lucide-react';
 
-const MainHeader = () => {
+interface MainHeaderProps {
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const MainHeader: React.FC<MainHeaderProps> = ({ setIsOpen }) => {
   return (
     <header className={'bg-black text-white py-6 px-4'}>
       <nav>
-        <ul className={'flex gap-4'}>
+        <ul className={'hidden sm:flex gap-4'}>
           <MainHeaderLink to={'/'} content={'HOME'} />
           <MainHeaderLink to={'/users'} content={'ALL USERS'} />
           {/*  TODO: fix "to" attributes */}
@@ -12,6 +18,7 @@ const MainHeader = () => {
           <MainHeaderLink to={'/places/new'} content={'ADD PLACES'} />
           <MainHeaderLink to={'/auth'} content={'AUTHENTICATE'} />
         </ul>
+        <Menu className={'sm:hidden'} onClick={() => setIsOpen(true)} />
       </nav>
     </header>
   );
