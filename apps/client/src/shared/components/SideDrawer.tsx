@@ -12,7 +12,7 @@ const SideDrawer: React.FC<SideDrawerProps> = ({ onClose }) => {
       <div className={'h-18 flex justify-end items-center px-4 bg-black'}>
         <X color={'white'} onClick={onClose} />
       </div>
-      <ul className={'flex flex-col gap-4 pl-4 mt-4'}>
+      <ul className={'flex flex-col gap-6 mt-6'}>
         <MainHeaderLink to={'/'} content={'HOME'} />
         <MainHeaderLink to={'/users'} content={'ALL USERS'} />
         {/*  TODO: fix "to" attributes */}
