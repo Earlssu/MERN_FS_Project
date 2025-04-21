@@ -1,17 +1,8 @@
-import { X } from 'lucide-react';
-import * as React from 'react';
 import MainHeaderLink from '@/shared/components/MainHeaderLink.tsx';
 
-interface SideDrawerProps {
-  onClose: () => void;
-}
-
-const SideDrawer: React.FC<SideDrawerProps> = ({ onClose }) => {
+const SideDrawer = () => {
   return (
-    <aside className={'fixed left-0 top-0 z-{100} h-screen w-full bg-white'}>
-      <div className={'h-18 flex justify-end items-center px-4 bg-black'}>
-        <X color={'white'} onClick={onClose} />
-      </div>
+    <aside className={'fixed left-0 top-0 z-{100} h-screen w-4/5 bg-white z-10'}>
       <ul className={'flex flex-col gap-6 mt-6'}>
         <MainHeaderLink to={'/'} content={'HOME'} />
         <MainHeaderLink to={'/users'} content={'ALL USERS'} />
