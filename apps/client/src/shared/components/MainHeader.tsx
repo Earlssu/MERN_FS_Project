@@ -9,7 +9,7 @@ interface MainHeaderProps {
 const MainHeader: React.FC<MainHeaderProps> = ({ setIsOpen }) => {
   return (
     <header className={'bg-black text-white py-6 px-4'}>
-      <nav>
+      <nav className={'flex justify-end sm:justify-start'}>
         <ul className={'hidden sm:flex gap-4'}>
           <MainHeaderLink to={'/'} content={'HOME'} />
           <MainHeaderLink to={'/users'} content={'ALL USERS'} />
