@@ -14,8 +14,8 @@ const MainLayout = () => {
   return (
     <div>
       <MainHeader setIsOpen={setIsOpen} />
-      {isOpen && <SideDrawer />}
-      {isOpen && <Backdrop onClose={closeDrawer} />}
+      <SideDrawer isOpen={isOpen} />
+      <Backdrop onClose={closeDrawer} isOpen={isOpen} />
       <main>
         <Outlet />
       </main>
