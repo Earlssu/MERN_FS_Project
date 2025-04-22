@@ -10,7 +10,10 @@ interface UserItemProps {
 
 const UserItem: React.FC<{ user: UserItemProps }> = ({ user }) => {
   return (
-    <div className={'flex gap-4 border-b-1 border-gray-300 p-4'}>
+    <a
+      className={'flex gap-4 border-b-1 border-gray-300 p-4 hover:bg-amber-50'}
+      href={`/user/${user.id}`}
+    >
       <div>
         <img
           src={user.imageUrl}
@@ -30,7 +33,7 @@ const UserItem: React.FC<{ user: UserItemProps }> = ({ user }) => {
         </div>
         <div>마지막 방탈출: {user.lastUpdated}</div>
       </div>
-    </div>
+    </a>
   );
 };
 
