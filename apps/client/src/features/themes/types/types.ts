@@ -1,3 +1,5 @@
+export type User_DBType = {};
+
 export type ThemeType = {
   id: string;
   imageUrl: string;

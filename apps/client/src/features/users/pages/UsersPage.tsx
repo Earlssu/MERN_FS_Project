@@ -4,7 +4,7 @@ import { UserType } from '@/features/users/types/types.ts'; // TODO: Delete when
 // TODO: Delete when data is fetched
 const DUMMY_USERS: UserType[] = [
   {
-    id: '001',
+    id: 'user_001',
     name: '레플리카',
     imageUrl: 'https://picsum.photos/id/42/300/300',
     placeCount: 311,
@@ -14,7 +14,7 @@ const DUMMY_USERS: UserType[] = [
     lastUpdated: '2025-03-01',
   },
   {
-    id: '002',
+    id: 'user_002',
     name: '푸딩',
     imageUrl: 'https://picsum.photos/id/71/300/300',
     placeCount: 278,
@@ -23,7 +23,7 @@ const DUMMY_USERS: UserType[] = [
     lastUpdated: '2025-03-01',
   },
   {
-    id: '003',
+    id: 'user_003',
     name: '박타스',
     imageUrl: 'https://picsum.photos/id/125/300/300',
     placeCount: 531,
@@ -32,7 +32,7 @@ const DUMMY_USERS: UserType[] = [
     lastUpdated: '2025-03-27',
   },
   {
-    id: '004',
+    id: 'user_004',
     name: '여울',
     imageUrl: 'https://picsum.photos/id/221/300/300',
     placeCount: 457,
