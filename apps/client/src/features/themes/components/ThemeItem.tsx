@@ -1,4 +1,5 @@
 import { RATE_RECOMMENDATION, THEME_GENRE } from '@/features/themes/types/types.ts';
+import Button from '@/shared/components/FormElements/Button.tsx';
 
 interface ThemeItemProps {
   id?: string;
@@ -25,20 +26,16 @@ const ThemeItem: React.FC<{ theme: ThemeItemProps }> = ({ theme }) => {
   };
 
   return (
-    <div className={'flex gap-4 border-b-1 border-gray-300 p-4'}>
-      <div>
+    <div className={'w-5/6 mx-auto border border-gray-400 rounded-lg shadow-xl'}>
+      <div className={'w-full'}>
         <img
           src={theme.imageUrl}
           alt={theme.title}
-          className={'w-32 h-32 rounded-lg object-cover'}
+          className={'w-full max-h-80 object-cover rounded-t-lg'}
         />
       </div>
-      <div className={'flex flex-col gap-2'}>
-        <h3 className={'font-bold text-xl text-slate-800 hover:text-amber-400'}>
-          <a href={theme.bookingUrl} target={'_blank'}>
-            {theme.title}
-          </a>
-        </h3>
+      <div className={'flex flex-col gap-2 p-4'}>
+        <h3 className={'font-bold text-2xl text-slate-800'}>{theme.title}</h3>
         <div>
           추천도:{' '}
           <span className={`rounded-2xl text-center px-2 py-1 text-sm ${getRateColor(theme.rate)}`}>
@@ -53,6 +50,14 @@ const ThemeItem: React.FC<{ theme: ThemeItemProps }> = ({ theme }) => {
           </span>
         </div>
         <div>{theme.description}</div>
+      </div>
+      <div className={'border-0.5 border-gray-300'} />
+      <div className={'flex gap-4 justify-center p-4'}>
+        <Button style={'inverse'} size={'xl'} href={theme.bookingUrl}>
+          예약하러 가기
+        </Button>
+        <Button style={'edit'}>수정</Button>
+        <Button style={'danger'}>삭제</Button>
       </div>
     </div>
   );

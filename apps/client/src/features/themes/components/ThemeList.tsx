@@ -14,10 +14,12 @@ const ThemeList: React.FC<ThemeListProps> = ({ themes }) => {
         </div>
       ) : (
         <div>
-          <h2 className={'text-2xl font-bold mt-4 mx-4'}>추천 테마 리스트</h2>
-          {themes.map((theme) => {
-            return <ThemeItem key={theme.id} theme={theme} />;
-          })}
+          <h2 className={'text-2xl font-bold mt-8 mx-4 text-center'}>추천 테마 리스트</h2>
+          <div className={'flex flex-col gap-4 py-8'}>
+            {themes.map((theme) => {
+              return <ThemeItem key={theme.id} theme={theme} />;
+            })}
+          </div>
         </div>
       )}
     </div>

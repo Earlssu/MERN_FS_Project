@@ -51,7 +51,7 @@ const DUMMY_THEMES: { [userId: string]: ThemeType[] } = {
 };
 
 const UserThemes = () => {
-  const { userId } = useParams<{ userId: string }>();
+  const userId = useParams().userId;
 
   const themes: ThemeType[] = DUMMY_THEMES[userId ?? ''] ?? [];
 
