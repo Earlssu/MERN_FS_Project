@@ -5,27 +5,34 @@ interface ButtonProps {
   href?: string;
   size?: ButtonSize;
   style?: 'inverse' | 'danger' | 'edit' | 'default';
+  onClick?: () => void;
   children: React.ReactNode;
 }
 
 const getStyleClass = (style: ButtonProps['style']) => {
   switch (style) {
     case 'inverse':
-      return 'bg-white text-black border-gray-400';
+      return 'bg-white text-black border-gray-400 hover:bg-gray-100';
     case 'danger':
-      return 'bg-red-600 text-white border-red-700';
+      return 'bg-red-600 text-white border-red-700 hover:bg-red-500';
     case 'edit':
-      return 'bg-yellow-500 text-white border-yellow-600';
+      return 'bg-yellow-500 text-white border-yellow-600 hover:bg-yellow-400';
     case 'default':
     default:
-      return 'bg-slate-800 text-white border-slate-900';
+      return 'bg-slate-800 text-white border-slate-900 hover:bg-slate-700';
   }
 };
-
-const Button: React.FC<ButtonProps> = ({ href, size = 'md', style = 'default', children }) => {
+const Button: React.FC<ButtonProps> = ({
+  href,
+  size = 'md',
+  style = 'default',
+  children,
+  onClick,
+}) => {
   const styleClass = getStyleClass(style);
   const widthClass = widthMap[size];
-  const className = `inline-block border ${widthClass} p-4 rounded-md text-center ${styleClass}`;
+  const baseClass = 'inline-block border p-4 rounded-md text-center cursor-pointer transition';
+  const className = `${baseClass} ${widthClass} ${styleClass}`;
 
   if (href) {
     return (
@@ -35,7 +42,11 @@ const Button: React.FC<ButtonProps> = ({ href, size = 'md', style = 'default', c
     );
   }
 
-  return <button className={className}>{children}</button>;
+  return (
+    <button className={className} onClick={onClick}>
+      {children}
+    </button>
+  );
 };
 
 export default Button;
