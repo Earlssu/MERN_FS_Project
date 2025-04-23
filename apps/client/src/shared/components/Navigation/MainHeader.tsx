@@ -1,4 +1,4 @@
-import MainHeaderLink from '@/shared/components/MainHeaderLink.tsx';
+import MainHeaderLink from '@/shared/components/Navigation/MainHeaderLink.tsx';
 import * as React from 'react';
 import { Menu } from 'lucide-react';
 

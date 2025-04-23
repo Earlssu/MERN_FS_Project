@@ -1,4 +1,4 @@
-import MainHeaderLink from '@/shared/components/MainHeaderLink.tsx';
+import MainHeaderLink from '@/shared/components/Navigation/MainHeaderLink.tsx';
 
 interface SideDrawerProps {
   isOpen: boolean;
