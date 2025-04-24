@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom';
 import MainHeader from '@/shared/components/Navigation/MainHeader.tsx';
 import SideDrawer from '@/shared/components/Navigation/SideDrawer.tsx';
 import { useState } from 'react';
-import Backdrop from '@/shared/components/Navigation/Backdrop.tsx';
+import Backdrop from '@/shared/components/UIElements/Backdrop.tsx';
 
 const MainLayout = () => {
   const [isOpen, setIsOpen] = useState(false);

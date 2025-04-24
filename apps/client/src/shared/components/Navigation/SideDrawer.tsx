@@ -1,3 +1,5 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
 import MainHeaderLink from '@/shared/components/Navigation/MainHeaderLink.tsx';
 
 interface SideDrawerProps {
@@ -5,7 +7,11 @@ interface SideDrawerProps {
 }
 
 const SideDrawer: React.FC<SideDrawerProps> = ({ isOpen }) => {
-  return (
+  const drawerRoot = document.getElementById('drawer-hook');
+
+  if (!drawerRoot) return null;
+
+  const content = (
     <aside
       className={`
         fixed left-0 top-0 z-50 h-screen w-4/5 bg-white 
@@ -22,6 +28,8 @@ const SideDrawer: React.FC<SideDrawerProps> = ({ isOpen }) => {
       </ul>
     </aside>
   );
+
+  return ReactDOM.createPortal(content, drawerRoot);
 };
 
 export default SideDrawer;
