@@ -1,5 +1,5 @@
 export const widthMap = {
-  sm: 'w-20',
+  sm: 'w-24',
   md: 'w-32',
   lg: 'w-48',
   xl: 'w-64',

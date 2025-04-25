@@ -14,11 +14,11 @@ interface ThemeItemProps {
 }
 
 const ThemeItem: React.FC<{ theme: ThemeItemProps }> = ({ theme }) => {
-  const [showEdit, setShowEdit] = useState(false);
+  const [showMap, setShowMap] = useState(false);
 
-  const openEditHandler = () => setShowEdit(true);
+  const openMapHandler = () => setShowMap(true);
 
-  const closeEditHandler = () => setShowEdit(false);
+  const closeMapHandler = () => setShowMap(false);
 
   const getRateColor = (rate: RATE_RECOMMENDATION) => {
     switch (rate) {
@@ -36,8 +36,8 @@ const ThemeItem: React.FC<{ theme: ThemeItemProps }> = ({ theme }) => {
   return (
     <React.Fragment>
       <Modal
-        show={showEdit}
-        onCancel={closeEditHandler}
+        show={showMap}
+        onCancel={closeMapHandler}
         children={<div>Test</div>}
         backdropOpacity={'medium'}
         header={theme.title}
@@ -71,14 +71,21 @@ const ThemeItem: React.FC<{ theme: ThemeItemProps }> = ({ theme }) => {
           <div>{theme.description}</div>
         </div>
         <div className={'border-0.5 border-gray-300'} />
-        <div className={'flex gap-4 justify-center p-4'}>
-          <Button style={'inverse'} size={'xl'} href={theme.bookingUrl}>
+        <div className={'flex gap-4 justify-center p-4 flex-wrap sm:flex-nowrap'}>
+          <Button style={'inverse'} size={'lg'} onClick={openMapHandler}>
+            매장위치 보기
+          </Button>
+          <Button style={'inverse'} size={'lg'} href={theme.bookingUrl}>
             예약하러 가기
           </Button>
-          <Button style={'edit'} onClick={openEditHandler}>
-            수정
-          </Button>
-          <Button style={'danger'}>삭제</Button>
+          <div className={'flex gap-4'}>
+            <Button style={'edit'} size={'sm'}>
+              수정
+            </Button>
+            <Button style={'danger'} size={'sm'}>
+              삭제
+            </Button>
+          </div>
         </div>
       </div>
     </React.Fragment>
