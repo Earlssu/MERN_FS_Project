@@ -2,6 +2,7 @@ import { RATE_RECOMMENDATION, THEME_GENRE } from '@/features/themes/types/types.
 import Button from '@/shared/components/FormElements/Button.tsx';
 import React, { useState } from 'react';
 import Modal from '@/shared/components/UIElements/Modal.tsx';
+import GoogleMap from '@/shared/components/UIElements/Map.tsx';
 
 interface ThemeItemProps {
   id?: string;
@@ -38,7 +39,7 @@ const ThemeItem: React.FC<{ theme: ThemeItemProps }> = ({ theme }) => {
       <Modal
         show={showMap}
         onCancel={closeMapHandler}
-        children={<div>Test</div>}
+        children={<GoogleMap />}
         backdropOpacity={'medium'}
         header={theme.title}
         footer={<div>Footer</div>}
