@@ -40,6 +40,8 @@ const ThemeItem: React.FC<{ theme: ThemeItemProps }> = ({ theme }) => {
         onCancel={closeEditHandler}
         children={<div>Test</div>}
         backdropOpacity={'medium'}
+        header={theme.title}
+        footer={<div>Footer</div>}
       />
       <div className={'w-5/6 mx-auto border border-gray-400 rounded-lg shadow-xl'}>
         <div className={'w-full'}>

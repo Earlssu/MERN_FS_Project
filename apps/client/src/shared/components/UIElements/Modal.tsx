@@ -39,11 +39,26 @@ const ModalOverlay: React.FC<ModalOverlayProps> = ({ onSubmit, header, footer, c
   return ReactDOM.createPortal(content, drawerRoot);
 };
 
-const Modal: React.FC<ModalProps> = ({ show, children, onCancel, backdropOpacity }) => {
+const Modal: React.FC<ModalProps> = ({
+  show,
+  children,
+  onCancel,
+  backdropOpacity,
+  header,
+  footer,
+}) => {
   return (
     <React.Fragment>
       {show && <Backdrop onClose={onCancel} isOpen={show} opacity={backdropOpacity} />}
-      {show && <ModalOverlay show={show} onCancel={onCancel} children={children}></ModalOverlay>}
+      {show && (
+        <ModalOverlay
+          show={show}
+          onCancel={onCancel}
+          children={children}
+          header={header}
+          footer={footer}
+        />
+      )}
     </React.Fragment>
   );
 };
