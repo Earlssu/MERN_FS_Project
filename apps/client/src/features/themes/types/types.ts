@@ -1,5 +1,3 @@
-export type User_DBType = {};
-
 export type ThemeType = {
   id: string;
   imageUrl: string;
@@ -8,6 +6,16 @@ export type ThemeType = {
   genre: THEME_GENRE;
   rate: RATE_RECOMMENDATION;
   description: string;
+  store_info: StoreType;
+};
+
+export type StoreType = {
+  name: string;
+  address: string;
+  coordinates: {
+    lat: number;
+    lng: number;
+  };
 };
 
 export enum THEME_GENRE {

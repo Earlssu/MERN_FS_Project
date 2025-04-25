@@ -1,18 +1,10 @@
-import { RATE_RECOMMENDATION, THEME_GENRE } from '@/features/themes/types/types.ts';
+import { RATE_RECOMMENDATION, ThemeType } from '@/features/themes/types/types.ts';
 import Button from '@/shared/components/FormElements/Button.tsx';
 import React, { useState } from 'react';
 import Modal from '@/shared/components/UIElements/Modal.tsx';
-import GoogleMap from '@/shared/components/UIElements/Map.tsx';
+import Map from '@/shared/components/UIElements/Map.tsx';
 
-interface ThemeItemProps {
-  id?: string;
-  title: string;
-  imageUrl: string;
-  bookingUrl: string;
-  genre: THEME_GENRE;
-  rate: RATE_RECOMMENDATION;
-  description: string;
-}
+interface ThemeItemProps extends ThemeType {}
 
 const ThemeItem: React.FC<{ theme: ThemeItemProps }> = ({ theme }) => {
   const [showMap, setShowMap] = useState(false);
@@ -39,7 +31,7 @@ const ThemeItem: React.FC<{ theme: ThemeItemProps }> = ({ theme }) => {
       <Modal
         show={showMap}
         onCancel={closeMapHandler}
-        children={<GoogleMap />}
+        children={<Map getInfo={theme.store_info} />}
         backdropOpacity={'medium'}
         header={theme.title}
         footer={<div>Footer</div>}
