@@ -31,7 +31,7 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   const styleClass = getStyleClass(style);
   const widthClass = widthMap[size];
-  const baseClass = 'inline-block border p-4 rounded-md text-center cursor-pointer transition';
+  const baseClass = 'inline-block border sm:p-4 rounded-md text-center cursor-pointer transition';
   const className = `${baseClass} ${widthClass} ${styleClass}`;
 
   if (href) {
