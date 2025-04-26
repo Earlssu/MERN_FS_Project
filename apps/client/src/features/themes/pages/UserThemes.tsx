@@ -69,7 +69,7 @@ const DUMMY_THEMES: { [userId: string]: ThemeType[] } = {
       title: '슈퍼플레이어:PLAYER1',
       genre: THEME_GENRE.Adventure,
       rate: RATE_RECOMMENDATION.UniqueRecommend,
-      description: '지금까지 이런 방탈출은 없었다. ',
+      description: '지금까지 이런 방탈출은 없었다.',
       store_info: {
         name: '비밀의 화원 혜화점',
         placeId: 'ChIJ6dYa0AKjfDURZDNoI1PVS20',

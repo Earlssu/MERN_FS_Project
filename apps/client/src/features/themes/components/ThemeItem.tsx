@@ -1,8 +1,9 @@
-import { RATE_RECOMMENDATION, ThemeType } from '@/features/themes/types/types.ts';
+import { ThemeType } from '@/features/themes/types/types.ts';
 import Button from '@/shared/components/FormElements/Button.tsx';
 import React, { useState } from 'react';
 import Modal from '@/shared/components/UIElements/Modal.tsx';
 import Map from '@/shared/components/UIElements/Map.tsx';
+import { getRateColor } from '@/features/themes/hooks/useThemeUtils.ts';
 
 interface ThemeItemProps extends ThemeType {}
 
@@ -12,19 +13,6 @@ const ThemeItem: React.FC<{ theme: ThemeItemProps }> = ({ theme }) => {
   const openMapHandler = () => setShowMap(true);
 
   const closeMapHandler = () => setShowMap(false);
-
-  const getRateColor = (rate: RATE_RECOMMENDATION) => {
-    switch (rate) {
-      case RATE_RECOMMENDATION.LifeTheme:
-        return 'bg-indigo-700 text-white';
-      case RATE_RECOMMENDATION.StronglyRecommend:
-        return 'bg-amber-600 text-white';
-      case RATE_RECOMMENDATION.UniqueRecommend:
-        return 'bg-purple-600 text-white';
-      default:
-        return 'bg-gray-300 text-black';
-    }
-  };
 
   return (
     <React.Fragment>
