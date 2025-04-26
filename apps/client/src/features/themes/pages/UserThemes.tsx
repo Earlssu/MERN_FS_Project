@@ -16,10 +16,10 @@ const DUMMY_THEMES: { [userId: string]: ThemeType[] } = {
         '조선식 테마 / 스토리 / 문제가 만났다. 진짜 설화 속에 들어온 것 같고 감성을 자극하는 인테리어가 매우 취향에 맞음.',
       store_info: {
         name: '비트포비아 홍대던전',
-        address: '서울특별시 마포구 서교동 독막로3길 30 지하 2층',
+        placeId: 'ChIJHS3Y3MKZfDURpQy84h6xiuY',
         coordinates: {
-          lat: 37.550059,
-          lng: 126.917097,
+          lat: 37.549823,
+          lng: 126.91724,
         },
       },
     },
@@ -35,10 +35,10 @@ const DUMMY_THEMES: { [userId: string]: ThemeType[] } = {
         '모노룸 문제방의 정석. 비싸지만 돈이 하나도 아깝지 않은, 그야말로 방부르게 만드는 최고의 문제방 테마',
       store_info: {
         name: '비트포비아 홍대던전',
-        address: '서울특별시 마포구 서교동 독막로3길 30 지하 2층',
+        placeId: 'ChIJJzSPp3uifDURvKT-U2-H8nM',
         coordinates: {
-          lat: 37.550059,
-          lng: 126.917097,
+          lat: 37.549823,
+          lng: 126.91724,
         },
       },
     },
@@ -55,10 +55,10 @@ const DUMMY_THEMES: { [userId: string]: ThemeType[] } = {
       description: '히든 문제 다 내꺼!!',
       store_info: {
         name: '비트포비아 홍대던전',
-        address: '서울특별시 마포구 서교동 독막로3길 30 지하 2층',
+        placeId: 'ChIJJzSPp3uifDURvKT-U2-H8nM',
         coordinates: {
-          lat: 37.550059,
-          lng: 126.917097,
+          lat: 37.549823,
+          lng: 126.91724,
         },
       },
     },
@@ -72,10 +72,10 @@ const DUMMY_THEMES: { [userId: string]: ThemeType[] } = {
       description: '지금까지 이런 방탈출은 없었다. ',
       store_info: {
         name: '비트포비아 홍대던전',
-        address: '서울특별시 마포구 서교동 독막로3길 30 지하 2층',
+        placeId: 'ChIJJzSPp3uifDURvKT-U2-H8nM',
         coordinates: {
-          lat: 37.550059,
-          lng: 126.917097,
+          lat: 37.549823,
+          lng: 126.91724,
         },
       },
     },

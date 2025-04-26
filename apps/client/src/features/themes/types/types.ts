@@ -11,7 +11,7 @@ export type ThemeType = {
 
 export type StoreType = {
   name: string;
-  address: string;
+  placeId: string;
   coordinates: {
     lat: number;
     lng: number;
