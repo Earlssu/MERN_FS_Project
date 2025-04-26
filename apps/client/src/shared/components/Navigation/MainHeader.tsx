@@ -15,7 +15,7 @@ const MainHeader: React.FC<MainHeaderProps> = ({ setIsOpen }) => {
           <MainHeaderLink to={'/users'} content={'ALL USERS'} />
           {/*  TODO: fix "to" attributes */}
           <MainHeaderLink to={'/u1/places'} content={'MY PLACES'} />
-          <MainHeaderLink to={'/places/new'} content={'ADD PLACES'} />
+          <MainHeaderLink to={'/themes/new'} content={'ADD PLACES'} />
           <MainHeaderLink to={'/auth'} content={'AUTHENTICATE'} />
         </ul>
         <Menu className={'sm:hidden'} onClick={() => setIsOpen(true)} />

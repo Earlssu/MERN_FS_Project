@@ -4,6 +4,7 @@ import MainLayout from '@/layouts/MainLayout.tsx';
 import LandingPage from '@/pages/landing';
 import UserThemes from '@/features/themes/pages/UserThemes.tsx';
 import { UserPage } from '@/features/users';
+import NewTheme from '@/features/themes/pages/NewTheme.tsx';
 
 export const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ export const router = createBrowserRouter([
       {
         path: 'user/:userId',
         element: <UserThemes />,
+      },
+      {
+        path: 'themes/new',
+        element: <NewTheme />,
       },
     ],
   },
