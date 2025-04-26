@@ -34,11 +34,11 @@ const DUMMY_THEMES: { [userId: string]: ThemeType[] } = {
       description:
         '모노룸 문제방의 정석. 비싸지만 돈이 하나도 아깝지 않은, 그야말로 방부르게 만드는 최고의 문제방 테마',
       store_info: {
-        name: '비트포비아 홍대던전',
-        placeId: 'ChIJJzSPp3uifDURvKT-U2-H8nM',
+        name: '찰리이스케이프',
+        placeId: 'ChIJAeLnXAClfDUREWWcf4-VYxY',
         coordinates: {
-          lat: 37.549823,
-          lng: 126.91724,
+          lat: 37.510603,
+          lng: 127.084991,
         },
       },
     },
@@ -54,11 +54,11 @@ const DUMMY_THEMES: { [userId: string]: ThemeType[] } = {
       rate: RATE_RECOMMENDATION.LifeTheme,
       description: '히든 문제 다 내꺼!!',
       store_info: {
-        name: '비트포비아 홍대던전',
-        placeId: 'ChIJJzSPp3uifDURvKT-U2-H8nM',
+        name: '룸즈에이 강남점',
+        placeId: 'ChIJUcrwP1OhfDURsr2L3FgudAU',
         coordinates: {
-          lat: 37.549823,
-          lng: 126.91724,
+          lat: 37.49631,
+          lng: 127.030729,
         },
       },
     },
@@ -71,11 +71,11 @@ const DUMMY_THEMES: { [userId: string]: ThemeType[] } = {
       rate: RATE_RECOMMENDATION.UniqueRecommend,
       description: '지금까지 이런 방탈출은 없었다. ',
       store_info: {
-        name: '비트포비아 홍대던전',
-        placeId: 'ChIJJzSPp3uifDURvKT-U2-H8nM',
+        name: '비밀의 화원 혜화점',
+        placeId: 'ChIJ6dYa0AKjfDURZDNoI1PVS20',
         coordinates: {
-          lat: 37.549823,
-          lng: 126.91724,
+          lat: 37.583007,
+          lng: 127.002116,
         },
       },
     },
