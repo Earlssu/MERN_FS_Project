@@ -1,15 +1,20 @@
 import { useEffect, useRef } from 'react';
 import { StoreType } from '@/features/themes/types/types.ts';
+import { loadGoogleMapsScript } from '@/shared/hooks/loadGoogleMaps.ts';
 
 interface MapProps {
   getInfo: StoreType;
 }
+
+const GOOGLE_MAPS_API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 
 const Map: React.FC<MapProps> = ({ getInfo }) => {
   const mapRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const initMap = async () => {
+      await loadGoogleMapsScript(GOOGLE_MAPS_API_KEY);
+
       if (!window.google || !window.google.maps) return;
 
       const { Map } = (await google.maps.importLibrary('maps')) as google.maps.MapsLibrary;
