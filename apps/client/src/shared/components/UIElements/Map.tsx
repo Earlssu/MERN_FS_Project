@@ -1,6 +1,7 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { StoreType } from '@/features/themes/types/types.ts';
 import { loadGoogleMapsScript } from '@/shared/hooks/loadGoogleMaps.ts';
+import LoadingSpinner from '@/shared/components/UIElements/LoadingSpinner.tsx';
 
 interface MapProps {
   getInfo: StoreType;
@@ -10,6 +11,7 @@ const GOOGLE_MAPS_API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 
 const Map: React.FC<MapProps> = ({ getInfo }) => {
   const mapRef = useRef<HTMLDivElement | null>(null);
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
     const initMap = async () => {
@@ -54,21 +56,13 @@ const Map: React.FC<MapProps> = ({ getInfo }) => {
 
             const infoWindow = new google.maps.InfoWindow({
               content: `
-            <div style="font-size:14px; line-height:1.5; max-width:300px;">
-              <div style="margin-bottom:6px;">
-                <a
-                  href="${place.url}"
-                  target="_blank"
-                  style="color:#1a73e8; text-decoration:underline; font-weight:bold; font-size:16px;"
-                >
-                  ${place.name}
-                </a>
-              </div>
-              <div style="margin-bottom:4px;">
-                📍 ${place.formatted_address ?? '주소 정보 없음'}
-              </div>
-              <div>⭐ 평점: ${place.rating ?? '정보 없음'}</div>
-            </div>;
+                <div style="font-size:14px; line-height:1.5; max-width:300px;">
+                  <a href="${place.url}" target="_blank" style="color:#1a73e8; font-weight:bold;">
+                    ${place.name}
+                  </a><br/>
+                  ${place.formatted_address}<br/>
+                  ⭐ 평점: ${place.rating ?? '정보 없음'}
+                </div>
               `,
             });
 
@@ -76,8 +70,8 @@ const Map: React.FC<MapProps> = ({ getInfo }) => {
               infoWindow.open(map, marker);
             });
 
-            // 페이지 로딩 시 InfoWindow 자동 열고 싶으면 아래 추가
             infoWindow.open(map, marker);
+            setIsReady(true);
           } else {
             console.error('Place details 요청 실패:', status);
           }
@@ -88,7 +82,16 @@ const Map: React.FC<MapProps> = ({ getInfo }) => {
     initMap();
   }, [getInfo]);
 
-  return <div ref={mapRef} className="w-full h-[500px] rounded-lg shadow" />;
+  return (
+    <div className="relative w-full h-[500px] rounded-lg shadow">
+      <div ref={mapRef} className="w-full h-full" />
+      {!isReady && (
+        <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-60">
+          <LoadingSpinner />
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default Map;

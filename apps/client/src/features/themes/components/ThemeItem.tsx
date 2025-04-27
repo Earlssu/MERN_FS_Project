@@ -1,11 +1,13 @@
 import { ThemeType } from '@/features/themes/types/types.ts';
 import Button from '@/shared/components/FormElements/Button.tsx';
-import React, { useState } from 'react';
+import React, { lazy, Suspense, useState } from 'react';
 import Modal from '@/shared/components/UIElements/Modal.tsx';
-import Map from '@/shared/components/UIElements/Map.tsx';
 import { getRateColor } from '@/features/themes/hooks/useThemeUtils.ts';
+import LoadingSpinner from '@/shared/components/UIElements/LoadingSpinner.tsx';
 
 interface ThemeItemProps extends ThemeType {}
+
+const Map = lazy(() => import('@/shared/components/UIElements/Map.tsx'));
 
 const ThemeItem: React.FC<{ theme: ThemeItemProps }> = ({ theme }) => {
   const [showMap, setShowMap] = useState(false);
@@ -19,11 +21,14 @@ const ThemeItem: React.FC<{ theme: ThemeItemProps }> = ({ theme }) => {
       <Modal
         show={showMap}
         onCancel={closeMapHandler}
-        children={<Map getInfo={theme.store_info} />}
-        backdropOpacity={'medium'}
         header={theme.title}
         footer={<div>Footer</div>}
-      />
+        backdropOpacity="medium"
+      >
+        <Suspense fallback={<LoadingSpinner />}>
+          <Map getInfo={theme.store_info} />
+        </Suspense>
+      </Modal>
       <div className={'w-5/6 mx-auto border border-gray-400 rounded-lg shadow-xl'}>
         <div className={'w-full'}>
           <img
