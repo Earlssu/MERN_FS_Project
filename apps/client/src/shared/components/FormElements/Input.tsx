@@ -37,11 +37,11 @@ const Input: React.FC<InputProps> = ({
   };
 
   return (
-    <div className={`flex flex-col gap-2 ${!inputState.isValid ? 'border border-red-400' : ''}`}>
+    <div className={`flex flex-col gap-2`}>
       <label htmlFor={id}>{label}</label>
       {element === 'input' ? (
         <input
-          className={'border border-slate-400 max-w-1/2 p-2'}
+          className={`border border-slate-400 max-w-1/2 p-2 ${!inputState.isValid ? 'border border-red-400' : ''}`}
           id={id}
           onChange={changeHandler}
           value={inputState.value}
@@ -49,7 +49,7 @@ const Input: React.FC<InputProps> = ({
         />
       ) : (
         <textarea
-          className={'border border-slate-400 max-w-1/2 p-2'}
+          className={`border border-slate-400 max-w-1/2 p-2 ${!inputState.isValid ? 'border border-red-400' : ''}`}
           id={id}
           rows={rows || 3}
           onChange={changeHandler}
