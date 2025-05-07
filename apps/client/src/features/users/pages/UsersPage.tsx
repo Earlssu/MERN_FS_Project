@@ -1,5 +1,5 @@
 import UsersList from '@/features/users/components/UsersList.tsx';
-import { UserType } from '@/features/users/types/types.ts'; // TODO: Delete when data is fetched
+import { UserType } from '@/features/users/types/users.ts'; // TODO: Delete when data is fetched
 
 // TODO: Delete when data is fetched
 const DUMMY_USERS: UserType[] = [

@@ -1,4 +1,4 @@
-import { ThemeType } from '@/features/themes/types/types.ts';
+import { ThemeType } from '@/features/themes/types/themes.ts';
 import ThemeItem from '@/features/themes/components/ThemeItem.tsx';
 
 interface ThemeListProps {

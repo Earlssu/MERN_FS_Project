@@ -1,4 +1,4 @@
-import { RATE_RECOMMENDATION, THEME_GENRE, ThemeType } from '@/features/themes/types/types.ts';
+import { RATE_RECOMMENDATION, THEME_GENRE, ThemeType } from '@/features/themes/types/themes.ts';
 import ThemeList from '@/features/themes/components/ThemeList.tsx';
 import { useParams } from 'react-router-dom';
 

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { StoreType } from '@/features/themes/types/types.ts';
+import { StoreType } from '@/features/themes/types/themes.ts';
 import { loadGoogleMapsScript } from '@/shared/hooks/loadGoogleMaps.ts';
 import LoadingSpinner from '@/shared/components/UIElements/LoadingSpinner.tsx';
 

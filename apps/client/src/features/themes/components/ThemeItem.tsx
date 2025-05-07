@@ -1,4 +1,4 @@
-import { ThemeType } from '@/features/themes/types/types.ts';
+import { ThemeType } from '@/features/themes/types/themes.ts';
 import Button from '@/shared/components/FormElements/Button.tsx';
 import React, { lazy, Suspense, useState } from 'react';
 import Modal from '@/shared/components/UIElements/Modal.tsx';
