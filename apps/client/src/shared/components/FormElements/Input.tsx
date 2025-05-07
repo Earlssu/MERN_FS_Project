@@ -14,7 +14,7 @@ const Input: React.FC<InputProps> = ({
   label,
   element = 'input',
   rows,
-  errorText,
+  errorText = 'Please enter a valid value',
   ...rest
 }) => {
   const inputReducer = (state: InputState, action: InputAction) => {
@@ -57,7 +57,7 @@ const Input: React.FC<InputProps> = ({
           {...(rest as React.TextareaHTMLAttributes<HTMLTextAreaElement>)}
         />
       )}
-      {!inputState.isValid && <p>{errorText}</p>}
+      {!inputState.isValid && <p className={'text-red-400'}>{errorText}</p>}
     </div>
   );
 };
