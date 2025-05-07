@@ -1,5 +1,7 @@
 import React, { useReducer } from 'react';
 import { InputAction, InputState } from '@/shared/types/inputs.ts';
+import { validate } from '@/shared/utils/validators.ts';
+import { Validator } from '@/shared/types/validator.ts';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   id: string;
@@ -7,6 +9,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   element?: 'input' | 'textarea';
   rows?: number;
   errorText: string;
+  validators: Validator[];
 }
 
 const Input: React.FC<InputProps> = ({
@@ -15,6 +18,7 @@ const Input: React.FC<InputProps> = ({
   element = 'input',
   rows,
   errorText = 'Please enter a valid value',
+  validators,
   ...rest
 }) => {
   const inputReducer = (state: InputState, action: InputAction) => {
@@ -23,17 +27,32 @@ const Input: React.FC<InputProps> = ({
         return {
           ...state,
           value: action.val,
-          isValid: true,
+          isValid: validate(action.val, action.validators),
+        };
+      case 'TOUCH':
+        return {
+          ...state,
+          isTouched: true,
         };
       default:
         return state;
     }
   };
 
-  const [inputState, dispatch] = useReducer(inputReducer, { value: '', isValid: false });
+  const [inputState, dispatch] = useReducer(inputReducer, {
+    value: '',
+    isValid: false,
+    isTouched: false,
+  });
 
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    dispatch({ type: 'CHANGE', val: event.target.value });
+    dispatch({ type: 'CHANGE', val: event.target.value, validators });
+  };
+
+  const touchHandler = () => {
+    dispatch({
+      type: 'TOUCH',
+    });
   };
 
   return (
@@ -41,23 +60,29 @@ const Input: React.FC<InputProps> = ({
       <label htmlFor={id}>{label}</label>
       {element === 'input' ? (
         <input
-          className={`border border-slate-400 max-w-1/2 p-2 ${!inputState.isValid ? 'border border-red-400' : ''}`}
+          className={`max-w-1/2 p-2 border rounded-sm ${
+            inputState.isTouched && !inputState.isValid ? 'border-red-400' : 'border-slate-400'
+          }`}
           id={id}
           onChange={changeHandler}
+          onBlur={touchHandler}
           value={inputState.value}
           {...rest}
         />
       ) : (
         <textarea
-          className={`border border-slate-400 max-w-1/2 p-2 ${!inputState.isValid ? 'border border-red-400' : ''}`}
+          className={`max-w-1/2 p-2 border rounded-sm ${
+            inputState.isTouched && !inputState.isValid ? 'border-red-400' : 'border-slate-400'
+          }`}
           id={id}
           rows={rows || 3}
           onChange={changeHandler}
+          onBlur={touchHandler}
           value={inputState.value}
           {...(rest as React.TextareaHTMLAttributes<HTMLTextAreaElement>)}
         />
       )}
-      {!inputState.isValid && <p className={'text-red-400'}>{errorText}</p>}
+      {!inputState.isValid && inputState.isTouched && <p className={'text-red-400'}>{errorText}</p>}
     </div>
   );
 };

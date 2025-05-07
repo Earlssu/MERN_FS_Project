@@ -1,4 +1,5 @@
 import Input from '@/shared/components/FormElements/Input.tsx';
+import { VALIDATOR_REQUIRE } from '@/shared/utils/validators.ts';
 
 const NewTheme = () => {
   return (
@@ -11,6 +12,7 @@ const NewTheme = () => {
         id={'input_00'}
         label={'Name'}
         placeholder={'Please enter your name'}
+        validators={[VALIDATOR_REQUIRE()]}
         errorText={'Please enter a valid value'}
       />
       <Input
@@ -18,6 +20,7 @@ const NewTheme = () => {
         label={'Description'}
         placeholder={'Please enter a description'}
         element={'textarea'}
+        validators={[VALIDATOR_REQUIRE()]}
         errorText={'Please enter a valid value'}
       />
     </form>
