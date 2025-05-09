@@ -1,5 +1,5 @@
-import React, { useReducer } from 'react';
-import { InputAction, InputState } from '@/shared/types/inputs.ts';
+import React, { useEffect, useReducer } from 'react';
+import { InputAction, InputState } from '@/shared/types/input.ts';
 import { validate } from '@/shared/utils/validators.ts';
 import { Validator } from '@/shared/types/validator.ts';
 
@@ -10,6 +10,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   rows?: number;
   errorText: string;
   validators: Validator[];
+  onInput: (id: string, value: string, isValid: boolean) => void;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -19,6 +20,7 @@ const Input: React.FC<InputProps> = ({
   rows,
   errorText = 'Please enter a valid value',
   validators,
+  onInput,
   ...rest
 }) => {
   const inputReducer = (state: InputState, action: InputAction) => {
@@ -54,6 +56,10 @@ const Input: React.FC<InputProps> = ({
       type: 'TOUCH',
     });
   };
+
+  useEffect(() => {
+    onInput(id, inputState.value, inputState.isValid);
+  }, [inputState]);
 
   return (
     <div className={`flex flex-col gap-2`}>

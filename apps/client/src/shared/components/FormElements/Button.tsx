@@ -1,5 +1,5 @@
 import React from 'react';
-import { ButtonSize, widthMap } from '@/shared/types/buttons.ts';
+import { ButtonSize, widthMap } from '@/shared/types/button.ts';
 
 interface ButtonProps {
   href?: string;
