@@ -21,10 +21,9 @@ const SideDrawer: React.FC<SideDrawerProps> = ({ isOpen }) => {
     >
       <ul className="flex flex-col gap-6 mt-6">
         <MainHeaderLink to="/" content="HOME" />
-        <MainHeaderLink to="/users" content="ALL USERS" />
-        <MainHeaderLink to="/u1/places" content="MY PLACES" />
-        <MainHeaderLink to="/places/new" content="ADD PLACES" />
-        <MainHeaderLink to="/auth" content="AUTHENTICATE" />
+        <MainHeaderLink to={'/u1/themes'} content={'MY THEMES'} />
+        <MainHeaderLink to={'/themes/new'} content={'ADD THEME'} />
+        <MainHeaderLink to={'/auth'} content={'AUTHENTICATE'} />
       </ul>
     </aside>
   );

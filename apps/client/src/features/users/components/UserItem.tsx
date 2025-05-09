@@ -16,7 +16,7 @@ const UserItem: React.FC<{ user: UserItemProps }> = ({ user }) => {
   return (
     <div
       className="flex gap-4 border-b border-gray-300 p-4 hover:bg-amber-50 cursor-pointer"
-      onClick={() => navigate(`/user/${user.id}`)}
+      onClick={() => navigate(`/${user.id}/themes`)}
     >
       <div>
         <img

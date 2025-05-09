@@ -12,10 +12,8 @@ const MainHeader: React.FC<MainHeaderProps> = ({ setIsOpen }) => {
       <nav className={'flex justify-end sm:justify-start'}>
         <ul className={'hidden sm:flex gap-4'}>
           <MainHeaderLink to={'/'} content={'HOME'} />
-          <MainHeaderLink to={'/users'} content={'ALL USERS'} />
-          {/*  TODO: fix "to" attributes */}
-          <MainHeaderLink to={'/u1/places'} content={'MY PLACES'} />
-          <MainHeaderLink to={'/themes/new'} content={'ADD PLACES'} />
+          <MainHeaderLink to={'/u1/themes'} content={'MY THEMES'} />
+          <MainHeaderLink to={'/themes/new'} content={'ADD THEME'} />
           <MainHeaderLink to={'/auth'} content={'AUTHENTICATE'} />
         </ul>
         <Menu className={'sm:hidden'} onClick={() => setIsOpen(true)} />
