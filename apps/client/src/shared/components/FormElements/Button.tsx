@@ -1,5 +1,6 @@
 import React from 'react';
 import { ButtonSize, widthMap } from '@/shared/types/button.ts';
+import { Link } from 'react-router-dom';
 
 interface ButtonProps {
   href?: string;
@@ -7,7 +8,8 @@ interface ButtonProps {
   style?: 'inverse' | 'danger' | 'edit' | 'default';
   onClick?: () => void;
   type?: React.ButtonHTMLAttributes<HTMLButtonElement>['type'];
-  disabled: boolean;
+  to?: string;
+  disabled?: boolean;
   children: React.ReactNode;
 }
 
@@ -30,6 +32,7 @@ const Button: React.FC<ButtonProps> = ({
   style = 'default',
   onClick,
   type,
+  to,
   disabled,
   children,
 }) => {
@@ -44,6 +47,14 @@ const Button: React.FC<ButtonProps> = ({
       <a href={href} target="_blank" rel="noopener noreferrer" className={className}>
         {children}
       </a>
+    );
+  }
+
+  if (to) {
+    return (
+      <Link to={to} className={className}>
+        {children}
+      </Link>
     );
   }
 

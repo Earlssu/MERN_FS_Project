@@ -65,7 +65,7 @@ const ThemeItem: React.FC<{ theme: ThemeItemProps }> = ({ theme }) => {
             예약하러 가기
           </Button>
           <div className={'flex gap-4'}>
-            <Button style={'edit'} size={'sm'}>
+            <Button style={'edit'} size={'sm'} to={`/themes/${theme.id}`}>
               수정
             </Button>
             <Button style={'danger'} size={'sm'}>
