@@ -47,11 +47,17 @@ const NewTheme = () => {
     dispatch({ type: 'INPUT_CHANGE', value: value, isValid: isValid, inputId: id });
   }, []);
 
+  const placeSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log(formState.inputs); // TODO: send this to the backend
+  };
+
   return (
     <form
       className={
         'border border-gray-400 p-4 max-w-3/4 mx-auto mt-4 rounded-md flex flex-col gap-4 sm:max-w-full sm:mx-4'
       }
+      onSubmit={placeSubmitHandler}
     >
       <Input
         id={'title'}
@@ -68,6 +74,15 @@ const NewTheme = () => {
         element={'textarea'}
         validators={[VALIDATOR_REQUIRE(), VALIDATOR_MINLENGTH(5)]}
         errorText={'Please enter a valid description (at least 5 characters)'}
+        onInputChange={inputHandler}
+      />
+      <Input
+        id={'input'}
+        label={'Address'}
+        placeholder={'Please enter an address'}
+        element={'textarea'}
+        validators={[VALIDATOR_REQUIRE()]}
+        errorText={'Please enter a valid address'}
         onInputChange={inputHandler}
       />
       <Button type={'submit'} disabled={!formState.isValid}>
