@@ -10,7 +10,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   rows?: number;
   errorText: string;
   validators: Validator[];
-  onInput: (id: string, value: string, isValid: boolean) => void;
+  onInputChange: (id: string, value: string, isValid: boolean) => void;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -20,7 +20,7 @@ const Input: React.FC<InputProps> = ({
   rows,
   errorText = 'Please enter a valid value',
   validators,
-  onInput,
+  onInputChange,
   ...rest
 }) => {
   const inputReducer = (state: InputState, action: InputAction) => {
@@ -58,8 +58,8 @@ const Input: React.FC<InputProps> = ({
   };
 
   useEffect(() => {
-    onInput(id, inputState.value, inputState.isValid);
-  }, [inputState]);
+    onInputChange(id, inputState.value, inputState.isValid);
+  }, [id, inputState.value, inputState.isValid, onInputChange]);
 
   return (
     <div className={`flex flex-col gap-2`}>
