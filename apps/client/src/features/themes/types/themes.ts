@@ -1,4 +1,4 @@
-export type ThemeType = {
+export interface ThemeType {
   id: string;
   imageUrl: string;
   bookingUrl: string;
@@ -7,7 +7,11 @@ export type ThemeType = {
   rate: RATE_RECOMMENDATION;
   description: string;
   store_info: StoreType;
-};
+}
+
+export interface UpdateThemeType extends ThemeType {
+  creator: string;
+}
 
 export type StoreType = {
   name: string;
