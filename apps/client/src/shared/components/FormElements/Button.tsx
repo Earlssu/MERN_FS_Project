@@ -6,6 +6,8 @@ interface ButtonProps {
   size?: ButtonSize;
   style?: 'inverse' | 'danger' | 'edit' | 'default';
   onClick?: () => void;
+  type?: React.ButtonHTMLAttributes<HTMLButtonElement>['type'];
+  disabled: boolean;
   children: React.ReactNode;
 }
 
@@ -26,12 +28,15 @@ const Button: React.FC<ButtonProps> = ({
   href,
   size = 'md',
   style = 'default',
-  children,
   onClick,
+  type,
+  disabled,
+  children,
 }) => {
   const styleClass = getStyleClass(style);
   const widthClass = widthMap[size];
-  const baseClass = 'inline-block border sm:p-4 rounded-md text-center cursor-pointer transition';
+  const baseClass =
+    'inline-block border sm:p-4 rounded-md text-center cursor-pointer transition disabled:cursor-not-allowed disabled:opacity-50';
   const className = `${baseClass} ${widthClass} ${styleClass}`;
 
   if (href) {
@@ -43,7 +48,7 @@ const Button: React.FC<ButtonProps> = ({
   }
 
   return (
-    <button className={className} onClick={onClick}>
+    <button className={className} onClick={onClick} type={type} disabled={disabled}>
       {children}
     </button>
   );
