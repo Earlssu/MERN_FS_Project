@@ -30,6 +30,8 @@ const UpdateTheme = () => {
         errorText={'Please enter a valid title'}
         validators={[VALIDATOR_REQUIRE()]}
         onInputChange={() => {}}
+        value={identifiedPlace.title}
+        isValid={true}
       />
       <Input
         id={'description'}
@@ -38,6 +40,8 @@ const UpdateTheme = () => {
         errorText={'Please enter a valid description (min. 5 characters).'}
         validators={[VALIDATOR_REQUIRE(), VALIDATOR_MINLENGTH(5)]}
         onInputChange={() => {}}
+        value={identifiedPlace.description}
+        isValid={true}
       />
       <Button type={'submit'} disabled={true}>
         UPDATE THEME
