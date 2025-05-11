@@ -54,7 +54,7 @@ const UpdateTheme = () => {
         initialValue={formState.inputs.description.value}
         initialValidity={formState.inputs.description.isValid}
       />
-      <Button type={'submit'} disabled={true}>
+      <Button type={'submit'} disabled={!formState.isValid}>
         UPDATE THEME
       </Button>
     </ThemeForm>

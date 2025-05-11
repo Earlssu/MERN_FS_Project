@@ -62,7 +62,7 @@ const Input: React.FC<InputProps> = ({
   };
 
   useEffect(() => {
-    if (onInputChange) onInputChange(id, inputState.value, inputState.isValid);
+    onInputChange(id, inputState.value, inputState.isValid);
   }, [id, inputState.value, inputState.isValid, onInputChange]);
 
   return (

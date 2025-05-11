@@ -48,7 +48,7 @@ const NewTheme = () => {
         onInputChange={inputHandler}
       />
       <Input
-        id={'input'}
+        id={'address'}
         label={'Address'}
         placeholder={'Please enter an address'}
         element={'textarea'}
