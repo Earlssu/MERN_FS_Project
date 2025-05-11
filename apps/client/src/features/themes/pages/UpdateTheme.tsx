@@ -5,9 +5,26 @@ import { VALIDATOR_MINLENGTH, VALIDATOR_REQUIRE } from '@/shared/utils/validator
 import Button from '@/shared/components/FormElements/Button.tsx';
 import ThemeForm from '@/features/themes/components/ThemeForm.tsx';
 import { useForm } from '@/shared/hooks/useForm.ts';
+import { useEffect, useState } from 'react';
 
 const UpdateTheme = () => {
   const themeId = useParams().tid;
+
+  // TODO: In the future, this will be all changed to match HTTP fetch method
+  const [isLoading, setIsLoading] = useState(true);
+  const [formState, inputHandler, setFormData] = useForm(
+    {
+      title: {
+        value: '',
+        isValid: false,
+      },
+      description: {
+        value: '',
+        isValid: false,
+      },
+    },
+    false,
+  );
 
   const identifiedPlace = DUMMY_THEMES.find((t) => t.id == themeId);
 
@@ -15,24 +32,31 @@ const UpdateTheme = () => {
     return <div>COULD NOT FIND A THEME!</div>;
   }
 
-  const [formState, inputHandler] = useForm(
-    {
-      title: {
-        value: identifiedPlace.title,
-        isValid: true,
+  useEffect(() => {
+    setFormData(
+      {
+        title: {
+          value: identifiedPlace.title,
+          isValid: true,
+        },
+        description: {
+          value: identifiedPlace.description,
+          isValid: true,
+        },
       },
-      description: {
-        value: identifiedPlace.description,
-        isValid: true,
-      },
-    },
-    true,
-  );
+      true,
+    );
+    setIsLoading(false);
+  }, [setFormData, identifiedPlace]);
 
   const placeSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log(formState.inputs); // TODO: send this to the backend
   };
+
+  if (isLoading) {
+    return <div>LOADING . . .</div>;
+  }
 
   return (
     <ThemeForm onSubmit={placeSubmitHandler}>

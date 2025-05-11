@@ -30,6 +30,21 @@ const formReducer = (state: FormState, action: FormAction) => {
   }
 };
 
+/**
+ * Custom hook for managing form state and validation.
+ *
+ * @param {FormState['inputs']} initialInputs - Initial values and validity for form inputs.
+ * @param {boolean} initialFormValidity - Initial overall form validity.
+ *
+ * @returns {[
+ *   FormState,
+ *   (id: string, value: string, isValid: boolean) => void,
+ *   (inputData: FormState['inputs'], formValidity: boolean) => void
+ * ]} Tuple containing:
+ * - formState: Current form state including inputs and validity
+ * - inputHandler: Function to handle input changes and trigger validation
+ * - setFormData: Function to programmatically update form data and validity
+ */
 export const useForm = (
   initialInputs: FormState['inputs'],
   initialFormValidity: boolean,
@@ -43,21 +58,6 @@ export const useForm = (
     isValid: initialFormValidity,
   });
 
-  /**
-   * Custom hook for managing form state and validation.
-   *
-   * @param {FormState['inputs']} initialInputs - Initial values and validity for form inputs.
-   * @param {boolean} initialFormValidity - Initial overall form validity.
-   *
-   * @returns {[
-   *   FormState,
-   *   (id: string, value: string, isValid: boolean) => void,
-   *   (inputData: FormState['inputs'], formValidity: boolean) => void
-   * ]} Tuple containing:
-   * - formState: Current form state including inputs and validity
-   * - inputHandler: Function to handle input changes and trigger validation
-   * - setFormData: Function to programmatically update form data and validity
-   */
   const inputHandler = useCallback((id: string, value: string, isValid: boolean) => {
     dispatch({ type: 'INPUT_CHANGE', value, isValid, inputId: id });
   }, []);
