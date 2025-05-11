@@ -40,6 +40,10 @@ const NewTheme = () => {
         value: '',
         isValid: false,
       },
+      address: {
+        value: '',
+        isValid: false,
+      },
     },
     isValid: false,
   });
