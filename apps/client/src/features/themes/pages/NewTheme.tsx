@@ -1,37 +1,12 @@
 import Input from '@/shared/components/FormElements/Input.tsx';
 import { VALIDATOR_MINLENGTH, VALIDATOR_REQUIRE } from '@/shared/utils/validators.ts';
-import { useCallback, useReducer } from 'react';
-import { FormAction, FormState } from '@/features/themes/types/form.ts';
 import Button from '@/shared/components/FormElements/Button.tsx';
 import ThemeForm from '@/features/themes/components/ThemeForm.tsx';
+import { useForm } from '@/shared/hooks/useForm.ts';
 
 const NewTheme = () => {
-  const formReducer = (state: FormState, action: FormAction) => {
-    switch (action.type) {
-      case 'INPUT_CHANGE':
-        let formIsValid = true;
-        for (const inputId in state.inputs) {
-          if (inputId === action.inputId) {
-            formIsValid = formIsValid && action.isValid;
-          } else {
-            formIsValid = formIsValid && state.inputs[inputId].isValid;
-          }
-        }
-        return {
-          ...state,
-          inputs: {
-            ...state.inputs,
-            [action.inputId]: { value: action.value, isValid: action.isValid },
-          },
-          isValid: formIsValid,
-        };
-      default:
-        return state;
-    }
-  };
-
-  const [formState, dispatch] = useReducer(formReducer, {
-    inputs: {
+  const [formState, inputHandler] = useForm(
+    {
       title: {
         value: '',
         isValid: false,
@@ -45,12 +20,8 @@ const NewTheme = () => {
         isValid: false,
       },
     },
-    isValid: false,
-  });
-
-  const inputHandler = useCallback((id: string, value: string, isValid: boolean) => {
-    dispatch({ type: 'INPUT_CHANGE', value: value, isValid: isValid, inputId: id });
-  }, []);
+    false,
+  );
 
   const placeSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
