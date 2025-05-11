@@ -31,6 +31,7 @@ const UpdateTheme = () => {
 
   const placeSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    console.log(formState.inputs); // TODO: send this to the backend
   };
 
   return (
