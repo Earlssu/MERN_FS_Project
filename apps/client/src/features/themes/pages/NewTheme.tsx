@@ -3,6 +3,7 @@ import { VALIDATOR_MINLENGTH, VALIDATOR_REQUIRE } from '@/shared/utils/validator
 import { useCallback, useReducer } from 'react';
 import { FormAction, FormState } from '@/features/themes/types/form.ts';
 import Button from '@/shared/components/FormElements/Button.tsx';
+import ThemeForm from '@/features/themes/components/ThemeForm.tsx';
 
 const NewTheme = () => {
   const formReducer = (state: FormState, action: FormAction) => {
@@ -53,12 +54,7 @@ const NewTheme = () => {
   };
 
   return (
-    <form
-      className={
-        'border border-gray-400 p-4 max-w-3/4 mx-auto mt-4 rounded-md flex flex-col gap-4 sm:max-w-full sm:mx-4'
-      }
-      onSubmit={placeSubmitHandler}
-    >
+    <ThemeForm onSubmit={placeSubmitHandler}>
       <Input
         id={'title'}
         label={'Title'}
@@ -88,7 +84,7 @@ const NewTheme = () => {
       <Button type={'submit'} disabled={!formState.isValid}>
         ADD THEME
       </Button>
-    </form>
+    </ThemeForm>
   );
 };
 
