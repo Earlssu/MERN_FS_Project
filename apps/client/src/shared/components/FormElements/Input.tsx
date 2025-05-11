@@ -11,8 +11,8 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   errorText: string;
   validators: Validator[];
   onInputChange: (id: string, value: string, isValid: boolean) => void;
-  value?: string;
-  isValid?: boolean;
+  initialValue?: string;
+  initialValidity?: boolean;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -23,8 +23,8 @@ const Input: React.FC<InputProps> = ({
   errorText = 'Please enter a valid value',
   validators,
   onInputChange,
-  value,
-  isValid,
+  initialValue,
+  initialValidity,
   ...rest
 }) => {
   const inputReducer = (state: InputState, action: InputAction) => {
@@ -46,8 +46,8 @@ const Input: React.FC<InputProps> = ({
   };
 
   const [inputState, dispatch] = useReducer(inputReducer, {
-    value: value || '',
-    isValid: isValid || false,
+    value: initialValue || '',
+    isValid: initialValidity || false,
     isTouched: false,
   });
 

@@ -41,8 +41,8 @@ const UpdateTheme = () => {
         errorText={'Please enter a valid title'}
         validators={[VALIDATOR_REQUIRE()]}
         onInputChange={inputHandler}
-        value={formState.inputs.title.value}
-        isValid={formState.inputs.title.isValid}
+        initialValue={formState.inputs.title.value}
+        initialValidity={formState.inputs.title.isValid}
       />
       <Input
         id={'description'}
@@ -51,8 +51,8 @@ const UpdateTheme = () => {
         errorText={'Please enter a valid description (min. 5 characters).'}
         validators={[VALIDATOR_REQUIRE(), VALIDATOR_MINLENGTH(5)]}
         onInputChange={inputHandler}
-        value={formState.inputs.description.value}
-        isValid={formState.inputs.description.isValid}
+        initialValue={formState.inputs.description.value}
+        initialValidity={formState.inputs.description.isValid}
       />
       <Button type={'submit'} disabled={true}>
         UPDATE THEME
