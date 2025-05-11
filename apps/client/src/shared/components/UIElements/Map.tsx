@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { StoreType } from '@/features/themes/types/themes.ts';
-import { loadGoogleMapsScript } from '@/shared/hooks/loadGoogleMaps.ts';
+import { loadGoogleMapsScript } from '@/shared/hooks/useLoadGoogleMaps.ts';
 import LoadingSpinner from '@/shared/components/UIElements/LoadingSpinner.tsx';
 
 interface MapProps {
