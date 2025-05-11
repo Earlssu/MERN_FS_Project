@@ -39,7 +39,7 @@ const Button: React.FC<ButtonProps> = ({
   const styleClass = getStyleClass(style);
   const widthClass = widthMap[size];
   const baseClass =
-    'inline-block border sm:p-4 rounded-md text-center cursor-pointer transition disabled:cursor-not-allowed disabled:opacity-50';
+    'w-fit inline-block border sm:p-4 rounded-md text-center cursor-pointer transition disabled:cursor-not-allowed disabled:opacity-50';
   const className = `${baseClass} ${widthClass} ${styleClass}`;
 
   if (href) {
