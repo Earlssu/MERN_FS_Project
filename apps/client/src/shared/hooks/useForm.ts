@@ -20,6 +20,11 @@ const formReducer = (state: FormState, action: FormAction) => {
         },
         isValid: formIsValid,
       };
+    case 'SET_DATA':
+      return {
+        inputs: action.inputs,
+        isValid: action.formIsValid,
+      };
     default:
       return state;
   }
@@ -28,15 +33,42 @@ const formReducer = (state: FormState, action: FormAction) => {
 export const useForm = (
   initialInputs: FormState['inputs'],
   initialFormValidity: boolean,
-): [FormState, (id: string, value: string, isValid: boolean) => void] => {
+): [
+  FormState,
+  (id: string, value: string, isValid: boolean) => void, // inputHandler
+  (inputData: FormState['inputs'], formValidity: boolean) => void, // setFormData
+] => {
   const [formState, dispatch] = useReducer(formReducer, {
     inputs: initialInputs,
     isValid: initialFormValidity,
   });
 
+  /**
+   * Custom hook for managing form state and validation.
+   *
+   * @param {FormState['inputs']} initialInputs - Initial values and validity for form inputs.
+   * @param {boolean} initialFormValidity - Initial overall form validity.
+   *
+   * @returns {[
+   *   FormState,
+   *   (id: string, value: string, isValid: boolean) => void,
+   *   (inputData: FormState['inputs'], formValidity: boolean) => void
+   * ]} Tuple containing:
+   * - formState: Current form state including inputs and validity
+   * - inputHandler: Function to handle input changes and trigger validation
+   * - setFormData: Function to programmatically update form data and validity
+   */
   const inputHandler = useCallback((id: string, value: string, isValid: boolean) => {
-    dispatch({ type: 'INPUT_CHANGE', value: value, isValid: isValid, inputId: id });
+    dispatch({ type: 'INPUT_CHANGE', value, isValid, inputId: id });
   }, []);
 
-  return [formState, inputHandler];
+  const setFormData = useCallback((inputData: FormState['inputs'], formValidity: boolean) => {
+    dispatch({
+      type: 'SET_DATA',
+      inputs: inputData,
+      formIsValid: formValidity,
+    });
+  }, []);
+
+  return [formState, inputHandler, setFormData];
 };

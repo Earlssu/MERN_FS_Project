@@ -17,4 +17,12 @@ export interface InputChangeAction {
   isValid: boolean;
 }
 
-export type FormAction = InputChangeAction;
+export interface SetDataAction {
+  type: 'SET_DATA';
+  inputs: {
+    [key: string]: InputField;
+  };
+  formIsValid: boolean;
+}
+
+export type FormAction = InputChangeAction | SetDataAction;
