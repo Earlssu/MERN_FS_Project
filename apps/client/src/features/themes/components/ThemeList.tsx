@@ -13,7 +13,7 @@ const ThemeList: React.FC<ThemeListProps> = ({ themes }) => {
       {themes.length == 0 ? (
         <Card className={'mt-4 mx-4'}>
           <h2 className={'text-2xl mb-2 place-self-center'}>등록된 테마가 없습니다.</h2>
-          <Button>테마 등록하기</Button>
+          <Button to={'/themes/new'}>테마 등록하기</Button>
         </Card>
       ) : (
         <div>

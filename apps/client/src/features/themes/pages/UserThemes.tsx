@@ -7,7 +7,6 @@ const UserThemes = () => {
   const userId = useParams().uid;
 
   const themes: ThemeType[] = DUMMY_USER_THEMES[userId ?? ''] ?? [];
-  // const themes: ThemeType[] = [];
 
   return (
     <div>

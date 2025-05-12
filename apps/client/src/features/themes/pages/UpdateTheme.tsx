@@ -1,11 +1,12 @@
 import { useParams } from 'react-router-dom';
-import { DUMMY_THEMES } from '@/features/themes/dummyThemes.ts';
 import Input from '@/shared/components/FormElements/Input.tsx';
 import { VALIDATOR_MINLENGTH, VALIDATOR_REQUIRE } from '@/shared/utils/validators.ts';
 import Button from '@/shared/components/FormElements/Button.tsx';
 import ThemeForm from '@/features/themes/components/ThemeForm.tsx';
 import { useForm } from '@/shared/hooks/useForm.ts';
 import { useEffect, useState } from 'react';
+import { DUMMY_THEMES } from '@/features/themes/dummyThemes.ts';
+import Card from '@/shared/components/UIElements/Card.tsx';
 
 const UpdateTheme = () => {
   const themeId = useParams().tid;
@@ -29,23 +30,31 @@ const UpdateTheme = () => {
   const identifiedPlace = DUMMY_THEMES.find((t) => t.id == themeId);
 
   if (!identifiedPlace) {
-    return <div>COULD NOT FIND A THEME!</div>;
+    return (
+      <div className={'flex justify-center py-12'}>
+        <Card className={'bg-gray-50 border-gray-100 px-24'}>
+          <h2 className={'text-xl font-bold'}>COULD NOT FIND A THEME!</h2>
+        </Card>
+      </div>
+    );
   }
 
   useEffect(() => {
-    setFormData(
-      {
-        title: {
-          value: identifiedPlace.title,
-          isValid: true,
+    if (identifiedPlace) {
+      setFormData(
+        {
+          title: {
+            value: identifiedPlace.title,
+            isValid: true,
+          },
+          description: {
+            value: identifiedPlace.description,
+            isValid: true,
+          },
         },
-        description: {
-          value: identifiedPlace.description,
-          isValid: true,
-        },
-      },
-      true,
-    );
+        true,
+      );
+    }
     setIsLoading(false);
   }, [setFormData, identifiedPlace]);
 
@@ -55,7 +64,11 @@ const UpdateTheme = () => {
   };
 
   if (isLoading) {
-    return <div>LOADING . . .</div>;
+    return (
+      <div className={'flex justify-center py-12'}>
+        <h2 className={'text-xl font-bold'}>LOADING . . .</h2>
+      </div>
+    );
   }
 
   return (
@@ -79,7 +92,7 @@ const UpdateTheme = () => {
         initialValue={formState.inputs.description.value}
         initialValidity={formState.inputs.description.isValid}
       />
-      <Button type={'submit'} disabled={!formState.isValid}>
+      <Button type={'submit'} disabled={!formState.isValid} className={'w-fit'}>
         UPDATE THEME
       </Button>
     </ThemeForm>
