@@ -92,7 +92,7 @@ const UpdateTheme = () => {
         initialValue={formState.inputs.description.value}
         initialValidity={formState.inputs.description.isValid}
       />
-      <Button type={'submit'} disabled={!formState.isValid} className={'w-fit'}>
+      <Button type={'submit'} disabled={!formState.isValid} className={'w-fit px-2'}>
         UPDATE THEME
       </Button>
     </ThemeForm>

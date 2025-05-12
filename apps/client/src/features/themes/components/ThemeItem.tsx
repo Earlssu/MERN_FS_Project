@@ -12,10 +12,17 @@ const Map = lazy(() => import('@/shared/components/UIElements/Map.tsx'));
 
 const ThemeItem: React.FC<{ theme: ThemeItemProps }> = ({ theme }) => {
   const [showMap, setShowMap] = useState(false);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   const openMapHandler = () => setShowMap(true);
+  const showDeleteWarningHandler = () => setShowConfirmModal(true);
 
   const closeMapHandler = () => setShowMap(false);
+  const cancelDeleteHandler = () => setShowConfirmModal(false);
+
+  const confirmDeleteHandler = () => {
+    console.log('DELETING . . .');
+  };
 
   return (
     <React.Fragment>
@@ -29,6 +36,23 @@ const ThemeItem: React.FC<{ theme: ThemeItemProps }> = ({ theme }) => {
         <Suspense fallback={<LoadingSpinner />}>
           <Map getInfo={theme.store_info} />
         </Suspense>
+      </Modal>
+      <Modal
+        show={showConfirmModal}
+        header={'테마를 삭제합니다'}
+        footer={
+          <div className={'flex justify-end items-center gap-4 pt-2 px-4'}>
+            <Button style={'inverse'} onClick={cancelDeleteHandler} className={'p-0'}>
+              취소
+            </Button>
+            <Button style={'danger'} onClick={confirmDeleteHandler}>
+              삭제
+            </Button>
+          </div>
+        }
+        onCancel={cancelDeleteHandler}
+      >
+        <p>정말 삭제하시겠습니까? 삭제하면 되돌릴 수 없습니다.</p>
       </Modal>
       <Card className="w-5/6 mx-auto p-0">
         <div className={'w-full'}>
@@ -71,7 +95,7 @@ const ThemeItem: React.FC<{ theme: ThemeItemProps }> = ({ theme }) => {
             <Button style={'edit'} size={'sm'} to={`/themes/${theme.id}`}>
               수정
             </Button>
-            <Button style={'danger'} size={'sm'}>
+            <Button style={'danger'} size={'sm'} onClick={showDeleteWarningHandler}>
               삭제
             </Button>
           </div>
