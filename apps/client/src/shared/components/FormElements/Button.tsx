@@ -1,6 +1,7 @@
 import React from 'react';
-import { ButtonSize, widthMap } from '@/shared/types/button.ts';
 import { Link } from 'react-router-dom';
+import { ButtonSize, widthMap } from '@/shared/types/button.ts';
+import { cx } from '@/shared/utils/cx.ts';
 
 interface ButtonProps {
   href?: string;
@@ -11,6 +12,7 @@ interface ButtonProps {
   to?: string;
   disabled?: boolean;
   children: React.ReactNode;
+  className?: string; // 추가: 사용자 정의 클래스 지원
 }
 
 const getStyleClass = (style: ButtonProps['style']) => {
@@ -26,6 +28,7 @@ const getStyleClass = (style: ButtonProps['style']) => {
       return 'bg-slate-800 text-white border-slate-900 hover:bg-slate-700';
   }
 };
+
 const Button: React.FC<ButtonProps> = ({
   href,
   size = 'md',
@@ -35,16 +38,23 @@ const Button: React.FC<ButtonProps> = ({
   to,
   disabled,
   children,
+  className,
 }) => {
-  const styleClass = getStyleClass(style);
-  const widthClass = widthMap[size];
   const baseClass =
-    'w-fit inline-block border sm:p-4 rounded-md text-center cursor-pointer transition disabled:cursor-not-allowed disabled:opacity-50';
-  const className = `${baseClass} ${widthClass} ${styleClass}`;
+    'w-fit inline-block border sm:p-4 rounded-md text-center cursor-pointer transition flex justify-center items-center min-h-12 sm:min-h-auto';
+  const disabledClass = 'disabled:cursor-not-allowed disabled:opacity-50';
+
+  const mergedClasses = cx(
+    baseClass,
+    widthMap[size],
+    getStyleClass(style),
+    disabled && disabledClass,
+    className,
+  );
 
   if (href) {
     return (
-      <a href={href} target="_blank" rel="noopener noreferrer" className={className}>
+      <a href={href} target="_blank" rel="noopener noreferrer" className={mergedClasses}>
         {children}
       </a>
     );
@@ -52,14 +62,14 @@ const Button: React.FC<ButtonProps> = ({
 
   if (to) {
     return (
-      <Link to={to} className={className}>
+      <Link to={to} className={mergedClasses}>
         {children}
       </Link>
     );
   }
 
   return (
-    <button className={className} onClick={onClick} type={type} disabled={disabled}>
+    <button className={mergedClasses} onClick={onClick} type={type} disabled={disabled}>
       {children}
     </button>
   );

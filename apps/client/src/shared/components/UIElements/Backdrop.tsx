@@ -1,4 +1,6 @@
 import ReactDOM from 'react-dom';
+import { twMerge } from 'tailwind-merge';
+import clsx from 'clsx';
 
 interface BackdropProps {
   onClose: () => void;
@@ -22,16 +24,15 @@ const Backdrop: React.FC<BackdropProps> = ({ onClose, isOpen, opacity }) => {
   const drawerRoot = document.getElementById('backdrop-hook');
   if (!drawerRoot) return null;
 
-  const content = (
-    <div
-      className={`
-        fixed inset-0 bg-black
-        transition-opacity duration-300
-        ${isOpen ? ` ${getOpacityClass(opacity)} pointer-events-auto` : 'opacity-0 pointer-events-none'}
-      `}
-      onClick={onClose}
-    />
-  );
+  const classes = clsx('fixed inset-0 bg-black transition-opacity duration-300', {
+    [getOpacityClass(opacity)]: isOpen,
+    'pointer-events-auto': isOpen,
+    'opacity-0 pointer-events-none': !isOpen,
+  });
+
+  const mergedClasses = twMerge(classes);
+
+  const content = <div className={mergedClasses} onClick={onClose} />;
 
   return ReactDOM.createPortal(content, drawerRoot);
 };
