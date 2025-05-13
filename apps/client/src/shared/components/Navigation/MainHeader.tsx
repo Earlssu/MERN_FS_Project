@@ -10,8 +10,14 @@ const MainHeader: React.FC<MainHeaderProps> = ({ setIsOpen }) => {
   return (
     <header className={'bg-black text-white py-6 px-4'}>
       <nav className={'flex justify-end sm:justify-start'}>
-        <ul className={'hidden sm:flex gap-4'}>
-          <MainHeaderLink to={'/'} content={'HOME'} />
+        <ul className={'hidden gap-4 sm:flex sm:flex-1 sm:pr-4'}>
+          <div className={'flex-1'}>
+            <MainHeaderLink
+              to={'/'}
+              content={'방태공'}
+              className={'w-fit text-2xl hover:text-blue-300'}
+            />
+          </div>
           <MainHeaderLink to={'/u1/themes'} content={'MY THEMES'} />
           <MainHeaderLink to={'/themes/new'} content={'ADD THEME'} />
           <MainHeaderLink to={'/auth'} content={'AUTHENTICATE'} />
