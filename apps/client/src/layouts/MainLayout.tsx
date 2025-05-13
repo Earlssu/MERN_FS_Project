@@ -1,9 +1,21 @@
 import { Outlet } from 'react-router-dom';
+import MainHeader from '@/shared/components/Navigation/MainHeader.tsx';
+import SideDrawer from '@/shared/components/Navigation/SideDrawer.tsx';
+import { useState } from 'react';
+import Backdrop from '@/shared/components/UIElements/Backdrop.tsx';
 
 const MainLayout = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const closeDrawer = () => {
+    setIsOpen(false);
+  };
+
   return (
     <div>
-      <header className={'bg-black text-white'}>공통 헤더</header>
+      <MainHeader setIsOpen={setIsOpen} />
+      <SideDrawer isOpen={isOpen} />
+      <Backdrop onClose={closeDrawer} isOpen={isOpen} />
       <main>
         <Outlet />
       </main>

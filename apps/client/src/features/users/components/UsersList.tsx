@@ -1,5 +1,5 @@
 import UserItem from '@/features/users/components/UserItem.tsx';
-import { UserType } from '@/features/users/types/types.ts';
+import { UserType } from '@/features/users/types/users.ts';
 
 interface UsersListProps {
   users: UserType[];
