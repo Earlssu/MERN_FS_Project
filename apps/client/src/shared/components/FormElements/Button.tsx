@@ -41,13 +41,13 @@ const Button: React.FC<ButtonProps> = ({
   className,
 }) => {
   const baseClass =
-    'w-fit inline-block border sm:p-4 rounded-md text-center cursor-pointer transition flex justify-center items-center min-h-12 sm:min-h-auto';
+    'border rounded-md text-center cursor-pointer transition flex justify-center items-center min-h-12 sm:min-h-auto sm:p-4';
   const disabledClass = 'disabled:cursor-not-allowed disabled:opacity-50';
 
   const mergedClasses = cx(
     baseClass,
-    widthMap[size],
     getStyleClass(style),
+    widthMap[size],
     disabled && disabledClass,
     className,
   );
