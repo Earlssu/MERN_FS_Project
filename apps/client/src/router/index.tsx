@@ -5,6 +5,7 @@ import UserThemes from '@/features/themes/pages/UserThemes.tsx';
 import { UserPage } from '@/features/users';
 import NewTheme from '@/features/themes/pages/NewTheme.tsx';
 import UpdateTheme from '@/features/themes/pages/UpdateTheme.tsx';
+import Auth from '@/features/users/pages/Auth.tsx';
 
 export const router = createBrowserRouter([
   {
@@ -12,7 +13,7 @@ export const router = createBrowserRouter([
     element: <MainLayout />,
     children: [
       {
-        path: 'login',
+        path: '/login',
         element: <LoginPage />,
       },
       {
@@ -20,16 +21,20 @@ export const router = createBrowserRouter([
         element: <UserPage />,
       },
       {
-        path: ':uid/themes',
+        path: '/:uid/themes',
         element: <UserThemes />,
       },
       {
-        path: 'themes/new',
+        path: '/themes/new',
         element: <NewTheme />,
       },
       {
-        path: 'themes/:tid',
+        path: '/themes/:tid',
         element: <UpdateTheme />,
+      },
+      {
+        path: '/auth',
+        element: <Auth />,
       },
     ],
   },
