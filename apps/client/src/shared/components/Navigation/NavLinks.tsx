@@ -14,7 +14,7 @@ const NavLinks: React.FC<NavLinksProps> = ({ isMain = true, className, linkClass
 
   const links = [
     { condition: true, to: '/', content: 'ALL USERS' },
-    { condition: auth.isLoggedIn, to: '/u1/themes', content: 'MY THEMES' },
+    { condition: auth.isLoggedIn, to: '/user_001/themes', content: 'MY THEMES' },
     { condition: auth.isLoggedIn, to: '/themes/new', content: 'ADD THEME' },
     { condition: !auth.isLoggedIn, to: '/auth', content: 'AUTHENTICATE' },
   ];
