@@ -24,11 +24,7 @@ export const router = createBrowserRouter([
       },
       {
         path: '/:uid/themes',
-        element: (
-          <ProtectedRoute>
-            <UserThemes />
-          </ProtectedRoute>
-        ),
+        element: <UserThemes />,
       },
       {
         path: '/themes/new',
