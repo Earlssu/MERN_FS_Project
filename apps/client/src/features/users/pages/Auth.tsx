@@ -7,9 +7,11 @@ import {
 } from '@/shared/utils/validators.ts';
 import { useForm } from '@/shared/hooks/useForm.ts';
 import Button from '@/shared/components/FormElements/Button.tsx';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { AuthContext } from '@/shared/context/authContext.ts';
 
 const Auth = () => {
+  const auth = useContext(AuthContext);
   const [isLogin, setIsLogin] = useState(true);
   const [formState, inputHandler, setFormData] = useForm(
     {
@@ -47,6 +49,7 @@ const Auth = () => {
   const authSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log(formState.inputs); // TODO: send this to the backend
+    auth.login();
   };
 
   return (
