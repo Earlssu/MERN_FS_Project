@@ -6,6 +6,8 @@ import { UserPage } from '@/features/users';
 import NewTheme from '@/features/themes/pages/NewTheme.tsx';
 import UpdateTheme from '@/features/themes/pages/UpdateTheme.tsx';
 import Auth from '@/features/users/pages/Auth.tsx';
+import ProtectedRoute from '@/router/ProtectedRoute.tsx';
+import NotFoundRedirect from '@/router/NotFoundRedirect.tsx';
 
 export const router = createBrowserRouter([
   {
@@ -22,19 +24,35 @@ export const router = createBrowserRouter([
       },
       {
         path: '/:uid/themes',
-        element: <UserThemes />,
+        element: (
+          <ProtectedRoute>
+            <UserThemes />
+          </ProtectedRoute>
+        ),
       },
       {
         path: '/themes/new',
-        element: <NewTheme />,
+        element: (
+          <ProtectedRoute>
+            <NewTheme />
+          </ProtectedRoute>
+        ),
       },
       {
         path: '/themes/:tid',
-        element: <UpdateTheme />,
+        element: (
+          <ProtectedRoute>
+            <UpdateTheme />
+          </ProtectedRoute>
+        ),
       },
       {
         path: '/auth',
         element: <Auth />,
+      },
+      {
+        path: '*',
+        element: <NotFoundRedirect />,
       },
     ],
   },
