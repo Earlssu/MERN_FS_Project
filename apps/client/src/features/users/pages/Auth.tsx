@@ -53,6 +53,7 @@ const Auth = () => {
     <div className={'p-4'}>
       <Card>
         <h2 className={'text-xl font-bold'}>Login Required</h2>
+        <div className={'border-1 border-gray-300 w-full'}></div>
         <form className={'w-full flex flex-col gap-4'} onSubmit={authSubmitHandler}>
           {!isLogin && (
             <Input
