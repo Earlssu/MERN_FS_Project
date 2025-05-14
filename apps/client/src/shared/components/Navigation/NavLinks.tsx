@@ -39,6 +39,16 @@ const NavLinks: React.FC<NavLinksProps> = ({ isMain = true, className, linkClass
             />
           ),
       )}
+      {auth.isLoggedIn && (
+        <li>
+          <button
+            className={'font-bold text-xl cursor-pointer hover:text-amber-400 '}
+            onClick={auth.logout}
+          >
+            Logout
+          </button>
+        </li>
+      )}
     </ul>
   );
 };
