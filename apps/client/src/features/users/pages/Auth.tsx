@@ -9,9 +9,11 @@ import { useForm } from '@/shared/hooks/useForm.ts';
 import Button from '@/shared/components/FormElements/Button.tsx';
 import { useContext, useState } from 'react';
 import { AuthContext } from '@/shared/context/authContext.ts';
+import { useNavigate } from 'react-router-dom';
 
 const Auth = () => {
   const auth = useContext(AuthContext);
+  const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
   const [formState, inputHandler, setFormData] = useForm(
     {
@@ -50,6 +52,7 @@ const Auth = () => {
     event.preventDefault();
     console.log(formState.inputs); // TODO: send this to the backend
     auth.login();
+    navigate('/');
   };
 
   return (

@@ -4,14 +4,18 @@ import { AuthContext } from '@/shared/context/authContext.ts';
 import { useCallback, useState } from 'react';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+  const [isLoggedIn, setIsLoggedIn] = useState(() => {
+    const saved = localStorage.getItem('isLoggedIn');
+    return saved === 'true';
+  });
   const login = useCallback(() => {
     setIsLoggedIn(true);
+    localStorage.setItem('isLoggedIn', 'true');
   }, []);
 
   const logout = useCallback(() => {
     setIsLoggedIn(false);
+    localStorage.removeItem('isLoggedIn');
   }, []);
 
   return (
