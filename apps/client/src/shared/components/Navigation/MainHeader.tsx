@@ -8,7 +8,7 @@ interface MainHeaderProps {
 
 const MainHeader: React.FC<MainHeaderProps> = ({ setIsOpen }) => {
   return (
-    <header className={'bg-[#112D4E] text-[#F9F7F7] py-6 px-4'}>
+    <header className={'bg-secondary text-base py-6 px-4'}>
       <nav className={'flex justify-end sm:justify-start'}>
         <div className={'hidden sm:flex sm:flex-1 sm:items-center sm:gap-4 sm:pr-4'}>
           <NavLinks className="flex flex-1" linkClassName="text-lg" />

@@ -15,9 +15,9 @@ const UsersList: React.FC<UsersListProps> = ({ users }) => {
       ) : (
         <div>
           <h2 className={'text-xl font-bold mt-4 mx-4'}>
-            <span className={'text-2xl text-[#3F72AF]'}>방</span>탈출{' '}
-            <span className={'text-2xl text-[#3F72AF]'}>테</span>마를{' '}
-            <span className={'text-2xl text-[#3F72AF]'}>공</span>유하자!{' '}
+            <span className={'text-2xl text-primary'}>방</span>탈출{' '}
+            <span className={'text-2xl text-primary'}>테</span>마를{' '}
+            <span className={'text-2xl text-primary'}>공</span>유하자!{' '}
           </h2>
           {users.map((user) => {
             return <UserItem key={user.id} user={user} />;
