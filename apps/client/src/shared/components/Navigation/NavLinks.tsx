@@ -13,10 +13,10 @@ const NavLinks: React.FC<NavLinksProps> = ({ isMain = true, className, linkClass
   const auth = useContext(AuthContext);
 
   const links = [
-    { condition: true, to: '/', content: 'ALL USERS' },
-    { condition: auth.isLoggedIn, to: '/user_001/themes', content: 'MY THEMES' },
-    { condition: auth.isLoggedIn, to: '/themes/new', content: 'ADD THEME' },
-    { condition: !auth.isLoggedIn, to: '/auth', content: 'AUTHENTICATE' },
+    { condition: true, to: '/', content: '모든 방테공' },
+    { condition: auth.isLoggedIn, to: '/user_001/themes', content: '공유한 테마' },
+    { condition: auth.isLoggedIn, to: '/themes/new', content: '테마 공유하기' },
+    { condition: !auth.isLoggedIn, to: '/auth', content: '로그인' },
   ];
 
   return (
@@ -24,7 +24,7 @@ const NavLinks: React.FC<NavLinksProps> = ({ isMain = true, className, linkClass
       {isMain && (
         <MainHeaderLink
           to={'/'}
-          content={'방태공'}
+          content={'방테공'}
           className={'text-2xl hover:text-blue-300 flex-1'}
         />
       )}
@@ -42,10 +42,10 @@ const NavLinks: React.FC<NavLinksProps> = ({ isMain = true, className, linkClass
       {auth.isLoggedIn && (
         <li>
           <button
-            className={'font-bold text-xl cursor-pointer hover:text-amber-400 '}
+            className={'font-bold text-lg cursor-pointer hover:text-amber-400 '}
             onClick={auth.logout}
           >
-            Logout
+            로그아웃
           </button>
         </li>
       )}

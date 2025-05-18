@@ -58,38 +58,38 @@ const Auth = () => {
   return (
     <div className={'p-4'}>
       <Card>
-        <h2 className={'text-xl font-bold'}>Login Required</h2>
+        <h2 className={'text-xl font-bold'}>로그인 해주세요</h2>
         <div className={'border-1 border-gray-300 w-full'}></div>
         <form className={'w-full flex flex-col gap-4'} onSubmit={authSubmitHandler}>
           {!isLogin && (
             <Input
               id={'name'}
-              label={'Name'}
-              errorText={'Please enter your name'}
+              label={'이름'}
+              errorText={'사용자 이름을 입력해주세요.'}
               validators={[VALIDATOR_REQUIRE()]}
               onInputChange={inputHandler}
             />
           )}
           <Input
             id={'email'}
-            label={'Email'}
-            errorText={'Please enter a valid Email'}
+            label={'이메일'}
+            errorText={'올바른 이메일을 입력해주세요.'}
             validators={[VALIDATOR_EMAIL()]}
             onInputChange={inputHandler}
           />
           <Input
             id={'password'}
-            label={'Password'}
-            errorText={'Please enter a valid password, at least 5 characters'}
+            label={'비밀번호'}
+            errorText={'올바른 비밀번호를 입력해주세요. (최소 5자 이상)'}
             validators={[VALIDATOR_MINLENGTH(5)]}
             onInputChange={inputHandler}
           />
           <Button type={'submit'} disabled={!formState.isValid}>
-            {isLogin ? 'LOGIN' : 'SIGNUP'}
+            {isLogin ? '로그인' : '회원가입'}
           </Button>
         </form>
         <Button style={'inverse'} className={'w-fit'} onClick={switchModeHandler}>
-          SWITCH TO {isLogin ? 'SIGNUP' : 'LOGIN'}
+          {isLogin ? '회원가입' : '로그인'}으로 변경
         </Button>
       </Card>
     </div>
