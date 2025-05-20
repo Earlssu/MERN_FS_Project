@@ -1,10 +1,5 @@
 // TODO: Remove this file after hooking the api with backend
-import {
-  RATE_RECOMMENDATION,
-  THEME_GENRE,
-  ThemeType,
-  UpdateThemeType,
-} from '@/features/themes/types/themes.ts';
+import { RATE_RECOMMENDATION, THEME_GENRE, ThemeType, UpdateThemeType } from '../types/themes.ts';
 
 export const DUMMY_USER_THEMES: { [userId: string]: ThemeType[] } = {
   user_001: [

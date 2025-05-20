@@ -5,7 +5,7 @@ import Button from '@/shared/components/FormElements/Button.tsx';
 import ThemeForm from '@/features/themes/components/ThemeForm.tsx';
 import { useForm } from '@/shared/hooks/useForm.ts';
 import { useEffect, useState } from 'react';
-import { DUMMY_THEMES } from '@/features/themes/dummyThemes.ts';
+import { DUMMY_THEMES } from '../../../../../shared/const/dummyThemes.ts';
 import Card from '@/shared/components/UIElements/Card.tsx';
 
 const UpdateTheme = () => {

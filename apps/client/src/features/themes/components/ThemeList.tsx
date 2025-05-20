@@ -1,4 +1,4 @@
-import { ThemeType } from '@/features/themes/types/themes.ts';
+import { ThemeType } from '../../../../../shared/types/themes.ts';
 import ThemeItem from '@/features/themes/components/ThemeItem.tsx';
 import Button from '@/shared/components/FormElements/Button.tsx';
 import Card from '@/shared/components/UIElements/Card.tsx';

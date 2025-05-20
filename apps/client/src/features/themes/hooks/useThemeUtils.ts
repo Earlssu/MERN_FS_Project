@@ -1,4 +1,4 @@
-import { RATE_RECOMMENDATION } from '@/features/themes/types/themes.ts';
+import { RATE_RECOMMENDATION } from '../../../../../shared/types/themes.ts';
 
 export const getRateColor = (rate: RATE_RECOMMENDATION) => {
   switch (rate) {

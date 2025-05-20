@@ -1,7 +1,7 @@
-import { ThemeType } from '@/features/themes/types/themes.ts';
+import { ThemeType } from '../../../../../shared/types/themes.ts';
 import ThemeList from '@/features/themes/components/ThemeList.tsx';
 import { useParams } from 'react-router-dom';
-import { DUMMY_USER_THEMES } from '@/features/themes/dummyThemes.ts';
+import { DUMMY_USER_THEMES } from '../../../../../shared/const/dummyThemes.ts';
 
 const UserThemes = () => {
   const userId = useParams().uid;
