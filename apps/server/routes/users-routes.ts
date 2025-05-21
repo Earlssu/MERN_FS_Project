@@ -1,15 +1,24 @@
-import { NextFunction, Request, Response } from 'express';
+import express, { NextFunction, Request, Response, RequestHandler } from 'express';
 import { DUMMY_USER_THEMES } from '../../shared/const/dummyThemes';
 
-const router = require('express').Router();
+const router = express.Router();
 
-router.get('/:uid', (req: Request, res: Response, next: NextFunction) => {
+interface UserParams {
+  uid: string;
+}
+
+const getUserThemes: RequestHandler<UserParams> = (req, res, next): void => {
   const userId = req.params.uid;
   const userThemes = DUMMY_USER_THEMES[userId];
+  
   if (!userThemes) {
-    return res.status(404).json({ message: 'User not found' });
+    res.status(404).json({ message: 'User not found' });
+    return;
   }
+  
   res.json({ themes: userThemes });
-});
+};
+
+router.get('/:uid', getUserThemes);
 
 export default router;

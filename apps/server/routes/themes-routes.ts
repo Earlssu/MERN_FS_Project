@@ -1,15 +1,26 @@
-import express from 'express';
+import express, { RequestHandler } from 'express';
 import { DUMMY_THEMES } from '../../shared/const/dummyThemes';
 
 const router = express.Router();
 
-router.get('/:tid', (req, res, next) => {
+interface ThemeParams {
+  tid: string;
+}
+
+const getThemeById: RequestHandler<ThemeParams> = (req, res, next): void => {
   const themeId = req.params.tid;
   const theme = DUMMY_THEMES.find((t) => t.id === themeId);
-  console.log('GET request in Themes');
+
+  if (!theme) {
+    res.status(404).json({ message: 'Could not find a theme for the provided id.' });
+    return;
+  }
+
   res.json({
     theme,
   });
-});
+};
+
+router.get('/:tid', getThemeById);
 
 export default router;
