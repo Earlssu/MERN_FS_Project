@@ -1,11 +1,14 @@
 import express, { ErrorRequestHandler, NextFunction, Request, Response } from 'express';
 import themesRoutes from './routes/themes-routes';
+import bodyParser from 'body-parser';
 
 interface CustomError extends Error {
   code?: number;
 }
 
 const app = express();
+
+app.use(bodyParser.json());
 
 app.use('/api/themes', themesRoutes);
 
