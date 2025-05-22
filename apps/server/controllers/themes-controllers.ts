@@ -3,6 +3,7 @@ import { DUMMY_THEMES, DUMMY_USER_THEMES } from '../../shared/const/dummyThemes'
 import { HttpError } from '../models/http-error';
 import { ThemeParams, ThemeResponse, UserParams, UserThemesResponse } from '../types/request-types';
 import { UpdateThemeType } from '../../shared/types/themes';
+import { randomUUID } from 'node:crypto';
 
 export const getThemeById: RequestHandler<ThemeParams, ThemeResponse> = (req, res, next): void => {
   const themeId = req.params.tid;
@@ -59,7 +60,7 @@ export const createTheme: RequestHandler<{}, ThemeResponse, Omit<UpdateThemeType
   }
 
   const createdTheme: UpdateThemeType = {
-    id: `thm_${Math.floor(Math.random() * (100 - 50 + 1)) + 50}`, // 50~100 사이의 무작위 숫자
+    id: `thm_${randomUUID().split('-')[0]}`,
     title,
     description,
     imageUrl,
