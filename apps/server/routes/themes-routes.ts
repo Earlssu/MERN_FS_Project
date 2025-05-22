@@ -12,7 +12,7 @@ const getThemeById: RequestHandler<ThemeParams> = (req, res, next): void => {
   const theme = DUMMY_THEMES.find((t) => t.id === themeId);
 
   if (!theme) {
-    res.status(404).json({ message: 'Could not find a theme for the provided id.' });
+    res.status(404).json({ message: 'Theme not found' });
     return;
   }
 
