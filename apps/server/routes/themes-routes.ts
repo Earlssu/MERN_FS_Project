@@ -1,5 +1,6 @@
 import express, { RequestHandler } from 'express';
 import { DUMMY_THEMES } from '../../shared/const/dummyThemes';
+import { HttpError } from '../models/http-error';
 
 const router = express.Router();
 
@@ -12,8 +13,7 @@ const getThemeById: RequestHandler<ThemeParams> = (req, res, next): void => {
   const theme = DUMMY_THEMES.find((t) => t.id === themeId);
 
   if (!theme) {
-    res.status(404).json({ message: 'Theme not found' });
-    return;
+    return next(new HttpError('Could not find a theme for the provided id.', 404));
   }
 
   res.json({
