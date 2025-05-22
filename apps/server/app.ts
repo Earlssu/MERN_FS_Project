@@ -1,6 +1,5 @@
 import express, { ErrorRequestHandler, NextFunction, Request, Response } from 'express';
 import themesRoutes from './routes/themes-routes';
-import usersRoutes from './routes/users-routes';
 
 interface CustomError extends Error {
   code?: number;
@@ -9,8 +8,6 @@ interface CustomError extends Error {
 const app = express();
 
 app.use('/api/themes', themesRoutes);
-
-app.use('/api/users', usersRoutes);
 
 const errorHandler: ErrorRequestHandler = (
   error: CustomError,
