@@ -1,5 +1,6 @@
-import express, { NextFunction, Request, Response, RequestHandler } from 'express';
+import express, { RequestHandler } from 'express';
 import { DUMMY_USER_THEMES } from '../../shared/const/dummyThemes';
+import { HttpError } from '../models/http-error';
 
 const router = express.Router();
 
@@ -10,12 +11,11 @@ interface UserParams {
 const getUserThemes: RequestHandler<UserParams> = (req, res, next): void => {
   const userId = req.params.uid;
   const userThemes = DUMMY_USER_THEMES[userId];
-  
+
   if (!userThemes) {
-    res.status(404).json({ message: 'User not found' });
-    return;
+    return next(new HttpError('Could not find a user for the provided id.', 404));
   }
-  
+
   res.json({ themes: userThemes });
 };
 
