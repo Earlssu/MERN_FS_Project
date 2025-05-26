@@ -82,3 +82,32 @@ export const createTheme: RequestHandler<{}, ThemeResponse, Omit<UpdateThemeType
   // For now, just return the created theme
   res.status(201).json({ theme: createdTheme });
 };
+
+export const updateTheme: RequestHandler<ThemeParams, ThemeResponse, UpdateThemeType> = async (
+  req,
+  res,
+  next,
+) => {
+  const { title, description } = req.body;
+  const themeId = req.params.tid;
+
+  // Validate required fields
+  if (!title || !description) {
+    return next(new HttpError('Invalid inputs passed, please check your data.', 422));
+  }
+
+  const theme = DUMMY_THEMES.find((t) => t.id === themeId);
+  if (!theme) {
+    return next(new HttpError('Could not find theme for the provided id.', 404));
+  }
+
+  // theme은 반드시 존재하며, UpdateThemeType에 맞는 필드가 모두 존재해야 함
+  const updatedTheme: UpdateThemeType = { ...theme };
+  updatedTheme.title = title;
+  updatedTheme.description = description;
+
+  const themeIndex = DUMMY_THEMES.findIndex((t) => t.id === themeId);
+  DUMMY_THEMES[themeIndex] = updatedTheme;
+
+  res.status(201).json({ theme: updatedTheme });
+};
