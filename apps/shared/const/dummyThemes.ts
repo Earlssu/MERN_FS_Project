@@ -100,7 +100,7 @@ export let DUMMY_THEMES: UpdateThemeType[] = [
         lng: 126.91724,
       },
     },
-    creator: 'usr_001',
+    creator: 'user_001',
   },
   {
     id: 'thm_002',

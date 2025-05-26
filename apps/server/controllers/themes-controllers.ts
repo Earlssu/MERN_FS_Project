@@ -1,5 +1,5 @@
 import { RequestHandler } from 'express';
-import { DUMMY_THEMES, DUMMY_USER_THEMES, updateDummyThemes } from '../../shared/const/dummyThemes';
+import { DUMMY_THEMES, updateDummyThemes } from '../../shared/const/dummyThemes';
 import { HttpError } from '../models/http-error';
 import { ThemeParams, ThemeResponse, UserParams, UserThemesResponse } from '../types/request-types';
 import { UpdateThemeType } from '../../shared/types/themes';
@@ -16,15 +16,17 @@ export const getThemeById: RequestHandler<ThemeParams, ThemeResponse> = (req, re
   res.json({ theme });
 };
 
-export const getThemeByUserId: RequestHandler<UserParams, UserThemesResponse> = (
+export const getThemesByUserId: RequestHandler<UserParams, UserThemesResponse> = (
   req,
   res,
   next,
 ): void => {
   const userId = req.params.uid;
-  const userThemes = DUMMY_USER_THEMES[userId];
+  const userThemes = DUMMY_THEMES.filter((t) => {
+    return t.creator === userId;
+  });
 
-  if (!userThemes) {
+  if (!userThemes || userThemes.length === 0) {
     return next(new HttpError('Could not find themes for the provided user id.', 404));
   }
 
