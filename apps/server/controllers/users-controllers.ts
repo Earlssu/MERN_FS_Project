@@ -10,6 +10,7 @@ export const getUsers: RequestHandler<UserParams> = (req, res, next) => {
 export const signup: RequestHandler<UserParams> = (req, res, next) => {
   const { name, email, password } = req.body;
   const createdUser: UserType = {
+    // TODO: switch to uuid when using the database
     id:
       DUMMY_USERS.length + 1 >= 10
         ? `user_0${DUMMY_USERS.length + 1}`
