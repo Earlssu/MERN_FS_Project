@@ -1,11 +1,11 @@
 import express, { RequestHandler } from 'express';
 import { getUsers, login, signup } from '../controllers/users-controllers';
-import { UserParams } from '../types/request-types';
+import { GetUsersResponse, LoginBody, SignupBody, UserAuthResponse } from '../types/request-types';
 
 const router = express.Router();
 
-router.get('/', getUsers as RequestHandler<UserParams>);
-router.post('/signup', signup as RequestHandler<UserParams>);
-router.post('/login', login as RequestHandler<UserParams>);
+router.get('/', getUsers as RequestHandler<{}, GetUsersResponse, any>);
+router.post('/signup', signup as RequestHandler<{}, UserAuthResponse, SignupBody>);
+router.post('/login', login as RequestHandler<{}, UserAuthResponse, LoginBody>);
 
 export default router;

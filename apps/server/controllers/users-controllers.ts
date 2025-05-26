@@ -1,11 +1,5 @@
 import { RequestHandler } from 'express';
-import {
-  CreateUserResponse,
-  GetUsersResponse,
-  LoginBody,
-  SignupBody,
-  UserResponse,
-} from '../types/request-types';
+import { GetUsersResponse, LoginBody, SignupBody, UserAuthResponse } from '../types/request-types';
 import { DUMMY_USERS, updateDummyUsers } from '../../shared/const/dummyThemes';
 import { UserType } from '../../shared/types/users';
 import { HttpError } from '../models/http-error';
@@ -14,7 +8,7 @@ export const getUsers: RequestHandler<{}, GetUsersResponse, any> = (req, res, ne
   res.json({ users: DUMMY_USERS });
 };
 
-export const signup: RequestHandler<{}, CreateUserResponse, SignupBody> = (req, res, next) => {
+export const signup: RequestHandler<{}, UserAuthResponse, SignupBody> = (req, res, next) => {
   const { name, email, password } = req.body;
   const createdUser: UserType = {
     // TODO: switch to uuid when using the database
@@ -33,7 +27,7 @@ export const signup: RequestHandler<{}, CreateUserResponse, SignupBody> = (req, 
   res.json({ message: 'User Created', user: createdUser });
 };
 
-export const login: RequestHandler<{}, UserResponse, LoginBody> = (req, res, next) => {
+export const login: RequestHandler<{}, UserAuthResponse, LoginBody> = (req, res, next) => {
   const { email, password } = req.body;
 
   const identifiedUser = DUMMY_USERS.find((u) => u.email === email);
@@ -41,5 +35,5 @@ export const login: RequestHandler<{}, UserResponse, LoginBody> = (req, res, nex
     return next(new HttpError('Could not identify user, credentials seems to be wrong', 401));
   }
 
-  res.json({ message: 'Logged in!' });
+  res.json({ message: 'Logged in!', user: identifiedUser });
 };

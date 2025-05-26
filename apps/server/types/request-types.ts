@@ -1,4 +1,3 @@
-// Common request parameter types
 import { UserType } from '../../shared/types/users';
 
 export interface ThemeParams {
@@ -25,7 +24,6 @@ export interface ThemeResponse {
     id: string;
     title: string;
     description: string;
-    // Add other theme properties as needed
   };
 }
 
@@ -34,11 +32,11 @@ export interface UserResponse {
   message?: string;
 }
 
-export interface CreateUserResponse extends UserResponse {
+export interface UserAuthResponse extends UserResponse {
   user: UserType;
 }
 
-export interface GetUsersResponse {
+export interface GetUsersResponse extends UserResponse {
   users: UserType[];
 }
 
@@ -47,6 +45,5 @@ export interface UserThemesResponse {
     id: string;
     title: string;
     description: string;
-    // Add other theme properties as needed
   }>;
 }
