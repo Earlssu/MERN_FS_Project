@@ -1,4 +1,6 @@
 // Common request parameter types
+import { UserType } from '../../shared/types/users';
+
 export interface ThemeParams {
   tid: string;
 }
@@ -7,11 +9,13 @@ export interface UserParams {
   uid: string;
 }
 
-// Common query parameter types
-export interface QueryParams {
-  page?: string;
-  limit?: string;
-  sort?: string;
+export interface LoginBody {
+  email: string;
+  password: string;
+}
+
+export interface SignupBody extends LoginBody {
+  name: string;
 }
 
 // Common response types
@@ -28,12 +32,14 @@ export interface ThemeResponse {
 // Common response types
 export interface UserResponse {
   message?: string;
-  theme: {
-    id: string;
-    title: string;
-    description: string;
-    // Add other theme properties as needed
-  };
+}
+
+export interface CreateUserResponse extends UserResponse {
+  user: UserType;
+}
+
+export interface GetUsersResponse {
+  users: UserType[];
 }
 
 export interface UserThemesResponse {
