@@ -16,6 +16,7 @@ export interface QueryParams {
 
 // Common response types
 export interface ThemeResponse {
+  message?: string;
   theme: {
     id: string;
     title: string;
@@ -31,4 +32,4 @@ export interface UserThemesResponse {
     description: string;
     // Add other theme properties as needed
   }>;
-} 
+}

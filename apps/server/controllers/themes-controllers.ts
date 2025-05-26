@@ -1,5 +1,5 @@
 import { RequestHandler } from 'express';
-import { DUMMY_THEMES, DUMMY_USER_THEMES } from '../../shared/const/dummyThemes';
+import { DUMMY_THEMES, DUMMY_USER_THEMES, updateDummyThemes } from '../../shared/const/dummyThemes';
 import { HttpError } from '../models/http-error';
 import { ThemeParams, ThemeResponse, UserParams, UserThemesResponse } from '../types/request-types';
 import { UpdateThemeType } from '../../shared/types/themes';
@@ -78,6 +78,9 @@ export const createTheme: RequestHandler<{}, ThemeResponse, Omit<UpdateThemeType
     creator: creator,
   };
 
+  const newThemes = [...DUMMY_THEMES, createdTheme];
+  updateDummyThemes(newThemes);
+
   // TODO: Save to database
   // For now, just return the created theme
   res.status(201).json({ theme: createdTheme });
@@ -110,4 +113,18 @@ export const updateTheme: RequestHandler<ThemeParams, ThemeResponse, UpdateTheme
   DUMMY_THEMES[themeIndex] = updatedTheme;
 
   res.status(201).json({ theme: updatedTheme });
+};
+
+export const deleteTheme: RequestHandler<ThemeParams, ThemeResponse> = (req, res, next) => {
+  const themeId = req.params.tid;
+
+  const theme = DUMMY_THEMES.find((t) => t.id === themeId);
+  if (!theme) {
+    return next(new HttpError('Could not find theme for the provided id.', 404));
+  }
+
+  const filteredThemes = DUMMY_THEMES.filter((t) => t.id !== themeId);
+  updateDummyThemes(filteredThemes);
+
+  res.status(201).json({ message: 'Deleted theme.', theme: theme });
 };

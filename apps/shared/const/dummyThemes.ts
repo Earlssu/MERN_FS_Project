@@ -81,7 +81,7 @@ export const DUMMY_USER_THEMES: { [userId: string]: ThemeType[] } = {
   ],
 };
 
-export const DUMMY_THEMES: UpdateThemeType[] = [
+export let DUMMY_THEMES: UpdateThemeType[] = [
   {
     id: 'thm_001',
     bookingUrl:
@@ -160,3 +160,7 @@ export const DUMMY_THEMES: UpdateThemeType[] = [
     creator: 'user_002',
   },
 ];
+
+export const updateDummyThemes = (newTheme: UpdateThemeType[]) => {
+  DUMMY_THEMES = [...newTheme];
+};
