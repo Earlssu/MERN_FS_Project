@@ -1,7 +1,7 @@
 // TODO: Remove this file after hooking the api with backend
 import { RATE_RECOMMENDATION, THEME_GENRE, ThemeType, UpdateThemeType } from '../types/themes';
 
-export const DUMMY_USER_THEMES: { [userId: string]: ThemeType[] } = {
+export let DUMMY_USERS: { [userId: string]: ThemeType[] } = {
   user_001: [
     {
       id: 'thm_001',
@@ -163,4 +163,8 @@ export let DUMMY_THEMES: UpdateThemeType[] = [
 
 export const updateDummyThemes = (newTheme: UpdateThemeType[]) => {
   DUMMY_THEMES = [...newTheme];
+};
+
+export const updateDummyUsers = (newUsers: { [userId: string]: ThemeType[] }) => {
+  DUMMY_USERS = { ...newUsers };
 };
