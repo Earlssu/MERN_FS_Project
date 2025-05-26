@@ -25,6 +25,17 @@ export interface ThemeResponse {
   };
 }
 
+// Common response types
+export interface UserResponse {
+  message?: string;
+  theme: {
+    id: string;
+    title: string;
+    description: string;
+    // Add other theme properties as needed
+  };
+}
+
 export interface UserThemesResponse {
   themes: Array<{
     id: string;

@@ -2,6 +2,7 @@ import express, { ErrorRequestHandler, NextFunction, Request, Response } from 'e
 import themesRoutes from './routes/themes-routes';
 import bodyParser from 'body-parser';
 import { HttpError } from './models/http-error';
+import usersRoutes from './routes/users-routes';
 
 interface CustomError extends Error {
   code?: number;
@@ -12,6 +13,7 @@ const app = express();
 app.use(bodyParser.json());
 
 app.use('/api/themes', themesRoutes);
+app.use('/api/users', usersRoutes);
 
 app.use((req, res, next) => {
   return next(new HttpError('Could not find this route.', 404));
