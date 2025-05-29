@@ -4,6 +4,7 @@ import { HttpError } from '../models/http-error';
 import { ThemeParams, ThemeResponse, UserParams, UserThemesResponse } from '../types/request-types';
 import { UpdateThemeType } from '../../shared/types/themes';
 import { randomUUID } from 'node:crypto';
+import { validationResult } from 'express-validator';
 
 export const getThemeById: RequestHandler<ThemeParams, ThemeResponse> = (req, res, next): void => {
   const themeId = req.params.tid;
@@ -38,23 +39,13 @@ export const createTheme: RequestHandler<{}, ThemeResponse, Omit<UpdateThemeType
   res,
   next,
 ): void => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return next(new HttpError('Invalid inputs passed. please check your data.', 422));
+  }
   const { title, description, imageUrl, bookingUrl, genre, rate, store_info, creator } = req.body;
 
   const { name, placeId, coordinates } = store_info;
-
-  // Validate required fields
-  if (
-    !title ||
-    !description ||
-    !imageUrl ||
-    !bookingUrl ||
-    !genre ||
-    !rate ||
-    !store_info ||
-    !creator
-  ) {
-    return next(new HttpError('Invalid inputs passed, please check your data.', 422));
-  }
 
   // Validate coordinates
   if (!coordinates.lat || !coordinates.lng) {
