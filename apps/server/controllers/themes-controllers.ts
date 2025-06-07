@@ -43,6 +43,7 @@ export const createTheme: RequestHandler<{}, ThemeResponse, Omit<UpdateThemeType
   if (!errors.isEmpty()) {
     return next(new HttpError('Invalid inputs passed. please check your data.', 422));
   }
+
   const { title, description, imageUrl, bookingUrl, genre, rate, store_info, creator } = req.body;
 
   const { name, placeId, coordinates } = store_info;
@@ -87,9 +88,9 @@ export const updateTheme: RequestHandler<ThemeParams, ThemeResponse, UpdateTheme
   const { title, description } = req.body;
   const themeId = req.params.tid;
 
-  // Validate required fields
-  if (!title || !description) {
-    return next(new HttpError('Invalid inputs passed, please check your data.', 422));
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return next(new HttpError('Invalid inputs passed. please check your data.', 422));
   }
 
   const theme = DUMMY_THEMES.find((t) => t.id === themeId);

@@ -27,7 +27,11 @@ router.post(
   ],
   createTheme as RequestHandler<{}, ThemeResponse, Omit<UpdateThemeType, 'id'>>,
 );
-router.patch('/:tid', updateTheme as RequestHandler<ThemeParams, ThemeResponse, UpdateThemeType>);
+router.patch(
+  '/:tid',
+  [check('title').not().isEmpty(), check('description').isLength({ min: 5 })],
+  updateTheme as RequestHandler<ThemeParams, ThemeResponse, UpdateThemeType>,
+);
 router.delete('/:tid', deleteTheme as RequestHandler<ThemeParams, ThemeResponse>);
 
 export default router;
