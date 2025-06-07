@@ -3,12 +3,18 @@ import { GetUsersResponse, LoginBody, SignupBody, UserAuthResponse } from '../ty
 import { DUMMY_USERS, updateDummyUsers } from '../../shared/const/dummyThemes';
 import { UserType } from '../../shared/types/users';
 import { HttpError } from '../models/http-error';
+import { validationResult } from 'express-validator';
 
 export const getUsers: RequestHandler<{}, GetUsersResponse, any> = (req, res, next) => {
   res.json({ users: DUMMY_USERS });
 };
 
 export const signup: RequestHandler<{}, UserAuthResponse, SignupBody> = (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return next(new HttpError('Invalid inputs passed. please check your data.', 422));
+  }
+
   const { name, email, password } = req.body;
 
   const hasUser = DUMMY_USERS.find((u) => u.email === email);
