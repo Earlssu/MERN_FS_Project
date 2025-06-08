@@ -3,6 +3,8 @@ import themesRoutes from './routes/themes-routes';
 import bodyParser from 'body-parser';
 import { HttpError } from './models/http-error';
 import usersRoutes from './routes/users-routes';
+import dotenv from 'dotenv';
+dotenv.config();
 
 interface CustomError extends Error {
   code?: number;
@@ -36,6 +38,7 @@ const errorHandler: ErrorRequestHandler = (
 
 app.use(errorHandler);
 
-app.listen(5001, () => {
-  console.log('Server is running on port 5001');
+const port = process.env.PORT || 5001;
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
