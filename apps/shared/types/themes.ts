@@ -15,10 +15,20 @@ export interface UpdateThemeType extends ThemeType {
 
 export type StoreType = {
   name: string;
-  placeId: string;
+  address?: string;
+  placeId?: string;
   coordinates: {
     lat: number;
     lng: number;
+  };
+  formatted_address?: string;
+  formatted_phone_number?: string;
+  rating?: number;
+  user_ratings_total?: number;
+  url?: string;
+  opening_hours?: {
+    open_now?: boolean;
+    weekday_text?: string[];
   };
 };
 
