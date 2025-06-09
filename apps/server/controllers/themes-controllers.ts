@@ -1,10 +1,22 @@
 import { RequestHandler } from 'express';
 import { DUMMY_THEMES, updateDummyThemes } from '../../shared/const/dummyThemes';
 import { HttpError } from '../models/http-error';
-import { ThemeParams, ThemeResponse, UserParams, UserThemesResponse } from '../types/request-types';
-import { UpdateThemeType } from '../../shared/types/themes';
+import {
+  CreateThemeRequestBody,
+  ThemeParams,
+  ThemeResponse,
+  UserParams,
+  UserThemesResponse,
+} from '../shared/types/request-types';
+import {
+  RATE_RECOMMENDATION,
+  StoreType,
+  THEME_GENRE,
+  UpdateThemeType,
+} from '../../shared/types/themes';
 import { randomUUID } from 'node:crypto';
 import { validationResult } from 'express-validator';
+import { getCoordsForAddress } from '../shared/utils/location';
 
 export const getThemeById: RequestHandler<ThemeParams, ThemeResponse> = (req, res, next): void => {
   const themeId = req.params.tid;
@@ -34,50 +46,48 @@ export const getThemesByUserId: RequestHandler<UserParams, UserThemesResponse> =
   res.json({ themes: userThemes });
 };
 
-export const createTheme: RequestHandler<{}, ThemeResponse, Omit<UpdateThemeType, 'id'>> = (
+export const createTheme: RequestHandler<{}, ThemeResponse, CreateThemeRequestBody> = async (
   req,
   res,
   next,
-): void => {
+): Promise<void> => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return next(new HttpError('Invalid inputs passed. please check your data.', 422));
   }
 
-  const { title, description, imageUrl, bookingUrl, genre, rate, store_info, creator } = req.body;
+  const { title, description, address, imageUrl, bookingUrl, genre, rate, creator } = req.body;
 
-  const { name, placeId, coordinates } = store_info;
+  try {
+    // 주소로부터 장소 정보 조회
+    const storeInfo = await getCoordsForAddress(address);
 
-  // Validate coordinates
-  if (!coordinates.lat || !coordinates.lng) {
-    return next(new HttpError('Invalid coordinates passed.', 422));
+    if (!storeInfo.coordinates) {
+      return next(new HttpError('Could not find coordinates for the provided address.', 422));
+    }
+
+    const createdTheme: UpdateThemeType = {
+      id: `thm_${randomUUID().split('-')[0]}`,
+      title,
+      description,
+      imageUrl: imageUrl || '',
+      bookingUrl: bookingUrl || '',
+      genre: genre || THEME_GENRE.Fantasy,
+      rate: rate || RATE_RECOMMENDATION.StronglyRecommend,
+      store_info: storeInfo as StoreType,
+      creator,
+    };
+
+    const newThemes = [...DUMMY_THEMES, createdTheme];
+    updateDummyThemes(newThemes);
+
+    res.status(201).json({ theme: createdTheme });
+  } catch (error) {
+    if (error instanceof HttpError) {
+      return next(error);
+    }
+    return next(new HttpError('Error creating theme.', 500));
   }
-
-  const createdTheme: UpdateThemeType = {
-    id: `thm_${randomUUID().split('-')[0]}`,
-    title,
-    description,
-    imageUrl,
-    bookingUrl,
-    genre,
-    rate,
-    store_info: {
-      name,
-      placeId,
-      coordinates: {
-        lat: coordinates.lat,
-        lng: coordinates.lng,
-      },
-    },
-    creator: creator,
-  };
-
-  const newThemes = [...DUMMY_THEMES, createdTheme];
-  updateDummyThemes(newThemes);
-
-  // TODO: Save to database
-  // For now, just return the created theme
-  res.status(201).json({ theme: createdTheme });
 };
 
 export const updateTheme: RequestHandler<ThemeParams, ThemeResponse, UpdateThemeType> = async (
