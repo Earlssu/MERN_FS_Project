@@ -1,5 +1,10 @@
 import { RequestHandler } from 'express';
-import { GetUsersResponse, LoginBody, SignupBody, UserAuthResponse } from '../types/request-types';
+import {
+  GetUsersResponse,
+  LoginBody,
+  SignupBody,
+  UserAuthResponse,
+} from '../shared/types/request-types';
 import { DUMMY_USERS, updateDummyUsers } from '../../shared/const/dummyThemes';
 import { UserType } from '../../shared/types/users';
 import { HttpError } from '../models/http-error';

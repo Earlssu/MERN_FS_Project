@@ -1,4 +1,5 @@
-import { UserType } from '../../shared/types/users';
+import { UserType } from '../../../shared/types/users';
+import { RATE_RECOMMENDATION, THEME_GENRE } from '../../../shared/types/themes';
 
 export interface ThemeParams {
   tid: string;
@@ -46,4 +47,16 @@ export interface UserThemesResponse {
     title: string;
     description: string;
   }>;
+}
+
+// 테마 생성에 필요한 요청 타입 정의
+export interface CreateThemeRequestBody {
+  title: string;
+  description: string;
+  address: string; // 주소만 받음
+  imageUrl?: string;
+  bookingUrl?: string;
+  genre?: THEME_GENRE;
+  rate?: RATE_RECOMMENDATION;
+  creator: string;
 }

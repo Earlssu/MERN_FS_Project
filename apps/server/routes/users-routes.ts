@@ -1,6 +1,11 @@
 import express, { RequestHandler } from 'express';
 import { getUsers, login, signup } from '../controllers/users-controllers';
-import { GetUsersResponse, LoginBody, SignupBody, UserAuthResponse } from '../types/request-types';
+import {
+  GetUsersResponse,
+  LoginBody,
+  SignupBody,
+  UserAuthResponse,
+} from '../shared/types/request-types';
 import { check } from 'express-validator';
 
 const router = express.Router();
