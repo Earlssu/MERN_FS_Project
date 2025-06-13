@@ -4,7 +4,7 @@ import { VALIDATOR_MINLENGTH, VALIDATOR_REQUIRE } from '@/shared/utils/validator
 import Button from '@/shared/components/FormElements/Button.tsx';
 import ThemeForm from '@/features/themes/components/ThemeForm.tsx';
 import { useForm } from '@/shared/hooks/useForm.ts';
-import { RATE_RECOMMENDATION, THEME_GENRE } from '../../../../../shared/types/themes.ts';
+import { RATE_RECOMMENDATION, THEME_GENRE } from '../../../../../shared/types/themes.ts'; // API 기본 설정
 
 // API 기본 설정
 const api = axios.create({
@@ -65,31 +65,31 @@ const NewTheme = () => {
     <ThemeForm onSubmit={placeSubmitHandler}>
       <Input
         id="title"
-        label="Title"
-        placeholder="Please enter your theme name"
+        label="제목"
+        placeholder="추천하실 테마 이름을 입력해주세요"
         validators={[VALIDATOR_REQUIRE()]}
-        errorText="Please enter a valid value"
+        errorText="테마명은 반드시 입력되어야 합니다."
         onInputChange={inputHandler}
       />
       <Input
         id="description"
-        label="Description"
-        placeholder="Please enter a description"
+        label="설명"
+        placeholder="해당 테마를 추천하는 이윺를 적어주세요"
         element="textarea"
         validators={[VALIDATOR_REQUIRE(), VALIDATOR_MINLENGTH(5)]}
-        errorText="Please enter a valid description (at least 5 characters)"
+        errorText="설명은 최소 5자 이상이어야 합니다."
         onInputChange={inputHandler}
       />
       <Input
         id="address"
-        label="Address"
-        placeholder="Please enter the store address"
+        label="주소"
+        placeholder="해당 테마의 주소명을 입력해주세요"
         validators={[VALIDATOR_REQUIRE()]}
-        errorText="Please enter a valid address"
+        errorText="올바른 주소명을 입력해주세요."
         onInputChange={inputHandler}
       />
       <Button type="submit" disabled={!formState.isValid}>
-        ADD THEME
+        공유하기
       </Button>
     </ThemeForm>
   );

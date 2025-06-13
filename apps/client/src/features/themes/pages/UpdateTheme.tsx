@@ -75,8 +75,8 @@ const UpdateTheme = () => {
     <ThemeForm onSubmit={placeSubmitHandler}>
       <Input
         id={'title'}
-        label={'Title'}
-        errorText={'Please enter a valid title'}
+        label={'제목'}
+        errorText={'올바른 테마명을 입력해주세요'}
         validators={[VALIDATOR_REQUIRE()]}
         onInputChange={inputHandler}
         initialValue={formState.inputs.title.value}
@@ -85,15 +85,15 @@ const UpdateTheme = () => {
       <Input
         id={'description'}
         element={'textarea'}
-        label={'Description'}
-        errorText={'Please enter a valid description (min. 5 characters).'}
+        label={'설명'}
+        errorText={'설명은 최소 5자 이상이어야 합니다.'}
         validators={[VALIDATOR_REQUIRE(), VALIDATOR_MINLENGTH(5)]}
         onInputChange={inputHandler}
         initialValue={formState.inputs.description.value}
         initialValidity={formState.inputs.description.isValid}
       />
       <Button type={'submit'} disabled={!formState.isValid} className={'w-fit px-2'}>
-        UPDATE THEME
+        수정하기
       </Button>
     </ThemeForm>
   );
