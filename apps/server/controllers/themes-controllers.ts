@@ -14,9 +14,9 @@ import {
   THEME_GENRE,
   UpdateThemeType,
 } from '../../shared/types/themes';
-import { randomUUID } from 'node:crypto';
 import { validationResult } from 'express-validator';
 import { getCoordsForAddress } from '../shared/utils/location';
+import Theme from '../models/theme';
 
 export const getThemeById: RequestHandler<ThemeParams, ThemeResponse> = (req, res, next): void => {
   const themeId = req.params.tid;
@@ -66,8 +66,7 @@ export const createTheme: RequestHandler<{}, ThemeResponse, CreateThemeRequestBo
       return next(new HttpError('Could not find coordinates for the provided address.', 422));
     }
 
-    const createdTheme: UpdateThemeType = {
-      id: `thm_${randomUUID().split('-')[0]}`,
+    const createdTheme = new Theme({
       title,
       description,
       imageUrl: imageUrl || '',
@@ -76,12 +75,10 @@ export const createTheme: RequestHandler<{}, ThemeResponse, CreateThemeRequestBo
       rate: rate || RATE_RECOMMENDATION.StronglyRecommend,
       store_info: storeInfo as StoreType,
       creator,
-    };
+    });
 
-    const newThemes = [...DUMMY_THEMES, createdTheme];
-    updateDummyThemes(newThemes);
-
-    res.status(201).json({ theme: createdTheme });
+    const result = await createdTheme.save();
+    res.status(201).json({ theme: result });
   } catch (error) {
     if (error instanceof HttpError) {
       return next(error);

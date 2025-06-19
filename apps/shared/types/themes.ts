@@ -13,6 +13,8 @@ export interface UpdateThemeType extends ThemeType {
   creator: string;
 }
 
+export interface ThemeDocument extends Omit<UpdateThemeType, 'id'>, Document {}
+
 export type StoreType = {
   name: string;
   address?: string;

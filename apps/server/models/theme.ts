@@ -1,7 +1,5 @@
-import mongoose, { Schema, Document } from 'mongoose';
-import { UpdateThemeType } from '../../shared/types/themes';
-
-export interface ThemeDocument extends Omit<UpdateThemeType, 'id'>, Document {}
+import mongoose, { Schema } from 'mongoose';
+import { ThemeDocument } from '../../shared/types/themes';
 
 const ThemeSchema = new Schema<ThemeDocument>({
   bookingUrl: { type: String, required: true },

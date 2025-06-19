@@ -22,7 +22,6 @@ export interface SignupBody extends LoginBody {
 export interface ThemeResponse {
   message?: string;
   theme: {
-    id: string;
     title: string;
     description: string;
   };
