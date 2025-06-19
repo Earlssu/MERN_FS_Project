@@ -4,6 +4,8 @@ import bodyParser from 'body-parser';
 import { HttpError } from './models/http-error';
 import usersRoutes from './routes/users-routes';
 import dotenv from 'dotenv';
+import * as mongoose from 'mongoose';
+
 dotenv.config();
 
 interface CustomError extends Error {
@@ -39,6 +41,14 @@ const errorHandler: ErrorRequestHandler = (
 app.use(errorHandler);
 
 const port = process.env.PORT || 5001;
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+const MONGO_URI = process.env.MONGO_URI as string;
+mongoose
+  .connect(MONGO_URI)
+  .then(() => {
+    app.listen(port, () => {
+      console.log(`Server is running on port ${port}`);
+    });
+  })
+  .catch((err) => {
+    console.log(err);
+  });
