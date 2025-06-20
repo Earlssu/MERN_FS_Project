@@ -18,15 +18,26 @@ import { validationResult } from 'express-validator';
 import { getCoordsForAddress } from '../shared/utils/location';
 import Theme from '../models/theme';
 
-export const getThemeById: RequestHandler<ThemeParams, ThemeResponse> = (req, res, next): void => {
+export const getThemeById: RequestHandler<ThemeParams, ThemeResponse> = async (
+  req,
+  res,
+  next,
+): Promise<void> => {
   const themeId = req.params.tid;
-  const theme = DUMMY_THEMES.find((t) => t.id === themeId);
+  let theme;
+  try {
+    theme = await Theme.findById(themeId);
+  } catch {
+    return next(new HttpError('Something went wrong, could not find a theme', 500));
+  }
 
   if (!theme) {
     return next(new HttpError('Could not find a theme for the provided id.', 404));
   }
 
-  res.json({ theme });
+  // theme => mongoose Object, so we switch to JS Object
+  // getters: true feature will trim _id to id property to created object
+  res.json({ theme: theme.toObject({ getters: true }) });
 };
 
 export const getThemesByUserId: RequestHandler<UserParams, UserThemesResponse> = (
