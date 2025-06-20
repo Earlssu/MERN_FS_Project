@@ -12,6 +12,7 @@ import {
   RATE_RECOMMENDATION,
   StoreType,
   THEME_GENRE,
+  ThemeType,
   UpdateThemeType,
 } from '../../shared/types/themes';
 import { validationResult } from 'express-validator';
@@ -40,21 +41,31 @@ export const getThemeById: RequestHandler<ThemeParams, ThemeResponse> = async (
   res.json({ theme: theme.toObject({ getters: true }) });
 };
 
-export const getThemesByUserId: RequestHandler<UserParams, UserThemesResponse> = (
+export const getThemesByUserId: RequestHandler<UserParams, UserThemesResponse> = async (
   req,
   res,
   next,
-): void => {
+): Promise<void> => {
   const userId = req.params.uid;
-  const userThemes = DUMMY_THEMES.filter((t) => {
-    return t.creator === userId;
-  });
+  let userThemes;
+
+  try {
+    userThemes = await Theme.find({ creator: userId });
+  } catch {
+    return next(new HttpError('Something went wrong, could not find a theme', 500));
+  }
 
   if (!userThemes || userThemes.length === 0) {
     return next(new HttpError('Could not find themes for the provided user id.', 404));
   }
 
-  res.json({ themes: userThemes });
+  // Mongoose Document → Plain Object 변환
+  // Note that assertion unknown as ThemeType is not the safest TS approach
+  const themes = userThemes.map((theme) =>
+    theme.toObject({ getters: true }),
+  ) as unknown as ThemeType[];
+
+  res.json({ themes });
 };
 
 export const createTheme: RequestHandler<{}, ThemeResponse, CreateThemeRequestBody> = async (

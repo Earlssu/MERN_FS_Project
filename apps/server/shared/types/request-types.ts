@@ -1,5 +1,5 @@
 import { UserType } from '../../../shared/types/users';
-import { RATE_RECOMMENDATION, THEME_GENRE } from '../../../shared/types/themes';
+import { RATE_RECOMMENDATION, THEME_GENRE, ThemeType } from '../../../shared/types/themes';
 
 export interface ThemeParams {
   tid: string;
@@ -41,11 +41,7 @@ export interface GetUsersResponse extends UserResponse {
 }
 
 export interface UserThemesResponse {
-  themes: Array<{
-    id: string;
-    title: string;
-    description: string;
-  }>;
+  themes: ThemeType[];
 }
 
 // 테마 생성에 필요한 요청 타입 정의
