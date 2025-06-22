@@ -153,19 +153,13 @@ export const deleteTheme: RequestHandler<ThemeParams, ThemeResponse> = async (
 
   let theme;
   try {
-    theme = await Theme.findById(themeId);
+    theme = await Theme.findOneAndDelete({ _id: themeId });
   } catch (err) {
-    return next(new HttpError('Something went wrong, could not update theme.', 500));
+    return next(new HttpError('Something went wrong, could not delete theme.', 500));
   }
 
   if (!theme) {
     return next(new HttpError('Could not find theme for the provided id.', 404));
-  }
-
-  try {
-    await theme.deleteOne();
-  } catch (err) {
-    return next(new HttpError('Something went wrong, could not update theme.', 500));
   }
 
   res.status(201).json({ message: 'Deleted theme.', theme: theme });
