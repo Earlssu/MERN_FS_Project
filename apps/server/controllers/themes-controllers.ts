@@ -1,5 +1,4 @@
 import { RequestHandler } from 'express';
-import { DUMMY_THEMES, updateDummyThemes } from '../../shared/const/dummyThemes';
 import { HttpError } from '../models/http-error';
 import {
   CreateThemeRequestBody,
@@ -122,7 +121,6 @@ export const updateTheme: RequestHandler<ThemeParams, ThemeResponse, UpdateTheme
     return next(new HttpError('Invalid inputs passed. please check your data.', 422));
   }
 
-  // const theme = DUMMY_THEMES.find((t) => t.id === themeId);
   let theme;
   try {
     theme = await Theme.findById(themeId);
@@ -146,16 +144,29 @@ export const updateTheme: RequestHandler<ThemeParams, ThemeResponse, UpdateTheme
   res.status(201).json({ theme });
 };
 
-export const deleteTheme: RequestHandler<ThemeParams, ThemeResponse> = (req, res, next) => {
+export const deleteTheme: RequestHandler<ThemeParams, ThemeResponse> = async (
+  req,
+  res,
+  next,
+): Promise<void> => {
   const themeId = req.params.tid;
 
-  const theme = DUMMY_THEMES.find((t) => t.id === themeId);
+  let theme;
+  try {
+    theme = await Theme.findById(themeId);
+  } catch (err) {
+    return next(new HttpError('Something went wrong, could not update theme.', 500));
+  }
+
   if (!theme) {
     return next(new HttpError('Could not find theme for the provided id.', 404));
   }
 
-  const filteredThemes = DUMMY_THEMES.filter((t) => t.id !== themeId);
-  updateDummyThemes(filteredThemes);
+  try {
+    await theme.deleteOne();
+  } catch (err) {
+    return next(new HttpError('Something went wrong, could not update theme.', 500));
+  }
 
   res.status(201).json({ message: 'Deleted theme.', theme: theme });
 };
