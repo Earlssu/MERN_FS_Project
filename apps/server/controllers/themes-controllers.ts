@@ -122,20 +122,28 @@ export const updateTheme: RequestHandler<ThemeParams, ThemeResponse, UpdateTheme
     return next(new HttpError('Invalid inputs passed. please check your data.', 422));
   }
 
-  const theme = DUMMY_THEMES.find((t) => t.id === themeId);
+  // const theme = DUMMY_THEMES.find((t) => t.id === themeId);
+  let theme;
+  try {
+    theme = await Theme.findById(themeId);
+  } catch (err) {
+    return next(new HttpError('Something went wrong, could not update theme.', 500));
+  }
+
   if (!theme) {
     return next(new HttpError('Could not find theme for the provided id.', 404));
   }
 
-  // theme은 반드시 존재하며, UpdateThemeType에 맞는 필드가 모두 존재해야 함
-  const updatedTheme: UpdateThemeType = { ...theme };
-  updatedTheme.title = title;
-  updatedTheme.description = description;
+  theme.title = title;
+  theme.description = description;
 
-  const themeIndex = DUMMY_THEMES.findIndex((t) => t.id === themeId);
-  DUMMY_THEMES[themeIndex] = updatedTheme;
+  try {
+    await theme.save();
+  } catch (err) {
+    return next(new HttpError('Something went wrong, could not update theme.', 500));
+  }
 
-  res.status(201).json({ theme: updatedTheme });
+  res.status(201).json({ theme });
 };
 
 export const deleteTheme: RequestHandler<ThemeParams, ThemeResponse> = (req, res, next) => {
