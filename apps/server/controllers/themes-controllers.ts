@@ -116,7 +116,7 @@ export const updateTheme: RequestHandler<ThemeParams, ThemeResponse, UpdateTheme
     theme.description = req.body.description;
 
     const result = await theme.save();
-    res.status(201).json({ theme: result.toObject({ getters: true }) });
+    res.status(200).json({ message: 'Updated theme.', theme: result.toObject({ getters: true }) });
   } catch (err) {
     return next(new HttpError('Something went wrong, could not update theme.', 500));
   }
@@ -134,7 +134,7 @@ export const deleteTheme: RequestHandler<ThemeParams, ThemeResponse> = async (
       return next(new HttpError('Could not find theme for the provided id.', 404));
     }
 
-    res.status(201).json({ message: 'Deleted theme.', theme: theme.toObject({ getters: true }) });
+    res.status(200).json({ message: 'Deleted theme.', theme: theme.toObject({ getters: true }) });
   } catch (err) {
     return next(new HttpError('Something went wrong, could not delete theme.', 500));
   }
