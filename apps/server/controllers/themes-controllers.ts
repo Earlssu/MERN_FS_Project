@@ -23,21 +23,17 @@ export const getThemeById: RequestHandler<ThemeParams, ThemeResponse> = async (
   res,
   next,
 ): Promise<void> => {
-  const themeId = req.params.tid;
-  let theme;
   try {
-    theme = await Theme.findById(themeId);
+    const theme = await Theme.findById(req.params.tid);
+
+    if (!theme) {
+      return next(new HttpError('Could not find a theme for the provided id.', 404));
+    }
+
+    res.json({ theme: theme.toObject({ getters: true }) });
   } catch {
     return next(new HttpError('Something went wrong, could not find a theme', 500));
   }
-
-  if (!theme) {
-    return next(new HttpError('Could not find a theme for the provided id.', 404));
-  }
-
-  // theme => mongoose Object, so we switch to JS Object
-  // getters: true feature will trim _id to id property to created object
-  res.json({ theme: theme.toObject({ getters: true }) });
 };
 
 export const getThemesByUserId: RequestHandler<UserParams, UserThemesResponse> = async (
@@ -45,26 +41,20 @@ export const getThemesByUserId: RequestHandler<UserParams, UserThemesResponse> =
   res,
   next,
 ): Promise<void> => {
-  const userId = req.params.uid;
-  let userThemes;
-
   try {
-    userThemes = await Theme.find({ creator: userId });
+    const userThemes = await Theme.find({ creator: req.params.uid });
+
+    if (!userThemes || userThemes.length === 0) {
+      return next(new HttpError('Could not find themes for the provided user id.', 404));
+    }
+
+    const themes = userThemes.map((theme) =>
+      theme.toObject({ getters: true }),
+    ) as unknown as ThemeType[];
+    res.json({ themes });
   } catch {
-    return next(new HttpError('Something went wrong, could not find a theme', 500));
+    return next(new HttpError('Something went wrong, could not find themes', 500));
   }
-
-  if (!userThemes || userThemes.length === 0) {
-    return next(new HttpError('Could not find themes for the provided user id.', 404));
-  }
-
-  // Mongoose Document → Plain Object 변환
-  // Note that assertion unknown as ThemeType is not the safest TS approach
-  const themes = userThemes.map((theme) =>
-    theme.toObject({ getters: true }),
-  ) as unknown as ThemeType[];
-
-  res.json({ themes });
 };
 
 export const createTheme: RequestHandler<{}, ThemeResponse, CreateThemeRequestBody> = async (
@@ -80,13 +70,10 @@ export const createTheme: RequestHandler<{}, ThemeResponse, CreateThemeRequestBo
   const { title, description, address, imageUrl, bookingUrl, genre, rate, creator } = req.body;
 
   try {
-    // 주소로부터 장소 정보 조회
     const storeInfo = await getCoordsForAddress(address);
-
     if (!storeInfo.coordinates) {
       return next(new HttpError('Could not find coordinates for the provided address.', 422));
     }
-
     const createdTheme = new Theme({
       title,
       description,
@@ -97,9 +84,8 @@ export const createTheme: RequestHandler<{}, ThemeResponse, CreateThemeRequestBo
       store_info: storeInfo as StoreType,
       creator,
     });
-
     const result = await createdTheme.save();
-    res.status(201).json({ theme: result });
+    res.status(201).json({ theme: result.toObject({ getters: true }) });
   } catch (error) {
     if (error instanceof HttpError) {
       return next(error);
@@ -113,35 +99,27 @@ export const updateTheme: RequestHandler<ThemeParams, ThemeResponse, UpdateTheme
   res,
   next,
 ) => {
-  const { title, description } = req.body;
-  const themeId = req.params.tid;
-
   const errors = validationResult(req);
+
   if (!errors.isEmpty()) {
     return next(new HttpError('Invalid inputs passed. please check your data.', 422));
   }
 
-  let theme;
   try {
-    theme = await Theme.findById(themeId);
+    const theme = await Theme.findById(req.params.tid);
+
+    if (!theme) {
+      return next(new HttpError('Could not find theme for the provided id.', 404));
+    }
+
+    theme.title = req.body.title;
+    theme.description = req.body.description;
+
+    const result = await theme.save();
+    res.status(201).json({ theme: result.toObject({ getters: true }) });
   } catch (err) {
     return next(new HttpError('Something went wrong, could not update theme.', 500));
   }
-
-  if (!theme) {
-    return next(new HttpError('Could not find theme for the provided id.', 404));
-  }
-
-  theme.title = title;
-  theme.description = description;
-
-  try {
-    await theme.save();
-  } catch (err) {
-    return next(new HttpError('Something went wrong, could not update theme.', 500));
-  }
-
-  res.status(201).json({ theme });
 };
 
 export const deleteTheme: RequestHandler<ThemeParams, ThemeResponse> = async (
@@ -149,18 +127,15 @@ export const deleteTheme: RequestHandler<ThemeParams, ThemeResponse> = async (
   res,
   next,
 ): Promise<void> => {
-  const themeId = req.params.tid;
-
-  let theme;
   try {
-    theme = await Theme.findOneAndDelete({ _id: themeId });
+    const theme = await Theme.findOneAndDelete({ _id: req.params.tid });
+
+    if (!theme) {
+      return next(new HttpError('Could not find theme for the provided id.', 404));
+    }
+
+    res.status(201).json({ message: 'Deleted theme.', theme: theme.toObject({ getters: true }) });
   } catch (err) {
     return next(new HttpError('Something went wrong, could not delete theme.', 500));
   }
-
-  if (!theme) {
-    return next(new HttpError('Could not find theme for the provided id.', 404));
-  }
-
-  res.status(201).json({ message: 'Deleted theme.', theme: theme });
 };
