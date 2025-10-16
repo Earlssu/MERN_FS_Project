@@ -20,7 +20,7 @@ function App() {
 
   return (
     <AuthContext.Provider value={{ isLoggedIn, login, logout }}>
-      <RouterProvider router={router} />;
+      <RouterProvider router={router} />
     </AuthContext.Provider>
   );
 }

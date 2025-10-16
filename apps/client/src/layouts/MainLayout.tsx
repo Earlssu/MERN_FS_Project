@@ -12,7 +12,7 @@ const MainLayout = () => {
   };
 
   return (
-    <div className={'bg-base h-screen'}>
+    <div className={'bg-base h-full'}>
       <MainHeader setIsOpen={setIsOpen} />
       <SideDrawer isOpen={isOpen} />
       <Backdrop onClose={closeDrawer} isOpen={isOpen} />
