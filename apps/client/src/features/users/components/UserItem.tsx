@@ -1,16 +1,7 @@
-interface UserItemProps {
-  id?: string;
-  name: string;
-  imageUrl: string;
-  placeCount: number;
-  lifeTheme: string;
-  lifeThemeUrl: string;
-  lastUpdated: string;
-}
-
 import { useNavigate } from 'react-router-dom';
+import { UserType } from '../../../../../shared/types/users.ts';
 
-const UserItem: React.FC<{ user: UserItemProps }> = ({ user }) => {
+const UserItem: React.FC<{ user: UserType }> = ({ user }) => {
   const navigate = useNavigate();
 
   return (
