@@ -56,7 +56,7 @@ const Auth = () => {
   };
 
   return (
-    <div className={'p-4'}>
+    <div className={'flex flex-col justify-center items-center p-4 h-screen'}>
       <Card>
         <h2 className={'text-xl font-bold'}>로그인 해주세요</h2>
         <div className={'border-1 border-gray-300 w-full'}></div>
@@ -84,13 +84,21 @@ const Auth = () => {
             validators={[VALIDATOR_MINLENGTH(5)]}
             onInputChange={inputHandler}
           />
-          <Button type={'submit'} disabled={!formState.isValid}>
-            {isLogin ? '로그인' : '회원가입'}
-          </Button>
+
+          <div className={'flex justify-center gap-4'}>
+            <Button type={'submit'} disabled={!formState.isValid}>
+              {isLogin ? '로그인' : '회원가입'}
+            </Button>
+            <Button
+              type={'button'}
+              style={'inverse'}
+              className={'w-fit'}
+              onClick={switchModeHandler}
+            >
+              {isLogin ? '회원가입' : '로그인'}으로 변경
+            </Button>
+          </div>
         </form>
-        <Button style={'inverse'} className={'w-fit'} onClick={switchModeHandler}>
-          {isLogin ? '회원가입' : '로그인'}으로 변경
-        </Button>
       </Card>
     </div>
   );
