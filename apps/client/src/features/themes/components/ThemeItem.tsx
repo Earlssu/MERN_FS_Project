@@ -57,7 +57,7 @@ const ThemeItem: React.FC<{ theme: ThemeItemProps }> = ({ theme }) => {
         <p>정말 삭제하시겠습니까? 삭제하면 되돌릴 수 없습니다.</p>
       </Modal>
 
-      <Card className="w-5/6 mx-auto p-0">
+      <Card className="w-5/6 p-0 max-w-[600px] min-w-[250px]">
         <div className={'w-full'}>
           <img
             src={theme.imageUrl}
@@ -65,7 +65,7 @@ const ThemeItem: React.FC<{ theme: ThemeItemProps }> = ({ theme }) => {
             className={'w-full max-h-80 object-cover rounded-t-lg'}
           />
         </div>
-        <div className={'flex flex-col gap-4 p-4'}>
+        <div className={'flex flex-col gap-4 p-4 w-full'}>
           <h3 className={'font-bold text-2xl text-slate-800'}>{theme.title}</h3>
           <div className={'flex items-center gap-2'}>
             <span
@@ -97,6 +97,7 @@ const ThemeItem: React.FC<{ theme: ThemeItemProps }> = ({ theme }) => {
         </div>
         <div className={'border-1 border-gray-300 w-full'} />
         <div className={'flex flex-col gap-4 justify-center pb-4'}>
+          {/* TODO: fix authContext Logic */}
           {auth.isLoggedIn && (
             <div className={'flex gap-4'}>
               <Button style={'edit'} size={'md'} to={`/themes/${theme.id}`}>

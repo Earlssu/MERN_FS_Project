@@ -8,11 +8,7 @@ const UserThemes = () => {
 
   const themes: ThemeType[] = DUMMY_USERS_THEMES[userId ?? ''] ?? [];
 
-  return (
-    <div>
-      <ThemeList themes={themes} />
-    </div>
-  );
+  return <ThemeList themes={themes} />;
 };
 
 export default UserThemes;
