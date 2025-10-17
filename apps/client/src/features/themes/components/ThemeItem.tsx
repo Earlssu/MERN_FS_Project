@@ -69,12 +69,12 @@ const ThemeItem: React.FC<{ theme: ThemeItemProps }> = ({ theme }) => {
           <h3 className={'font-bold text-2xl text-slate-800'}>{theme.title}</h3>
           <div className={'flex items-center gap-2'}>
             <span
-              className={'hover:cursor-pointer text-primary hover:text-secondary'}
+              className={'hover:cursor-pointer text-primary hover:text-blue-700'}
               onClick={openMapHandler}
             >
               매장위치 보기
             </span>
-            <a className={'text-primary hover:text-secondary'} href={theme.bookingUrl}>
+            <a className={'text-primary hover:text-blue-700'} href={theme.bookingUrl}>
               예약하러 가기
             </a>
           </div>
