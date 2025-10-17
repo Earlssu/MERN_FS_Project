@@ -56,6 +56,7 @@ const ThemeItem: React.FC<{ theme: ThemeItemProps }> = ({ theme }) => {
       >
         <p>정말 삭제하시겠습니까? 삭제하면 되돌릴 수 없습니다.</p>
       </Modal>
+
       <Card className="w-5/6 mx-auto p-0">
         <div className={'w-full'}>
           <img
@@ -64,8 +65,19 @@ const ThemeItem: React.FC<{ theme: ThemeItemProps }> = ({ theme }) => {
             className={'w-full max-h-80 object-cover rounded-t-lg'}
           />
         </div>
-        <div className={'flex flex-col gap-2 p-4'}>
+        <div className={'flex flex-col gap-4 p-4'}>
           <h3 className={'font-bold text-2xl text-slate-800'}>{theme.title}</h3>
+          <div className={'flex items-center gap-2'}>
+            <span
+              className={'hover:cursor-pointer text-primary hover:text-secondary'}
+              onClick={openMapHandler}
+            >
+              매장위치 보기
+            </span>
+            <a className={'text-primary hover:text-secondary'} href={theme.bookingUrl}>
+              예약하러 가기
+            </a>
+          </div>
           <div>
             추천도:{' '}
             <span
@@ -84,21 +96,13 @@ const ThemeItem: React.FC<{ theme: ThemeItemProps }> = ({ theme }) => {
           <div>{theme.description}</div>
         </div>
         <div className={'border-1 border-gray-300 w-full'} />
-        <div className={'flex gap-4 justify-center pb-4 flex-wrap px-2'}>
-          <div className={'flex gap-4'}>
-            <Button style={'inverse'} size={'lg'} onClick={openMapHandler}>
-              매장위치 보기
-            </Button>
-            <Button style={'inverse'} size={'lg'} href={theme.bookingUrl}>
-              예약하러 가기
-            </Button>
-          </div>
+        <div className={'flex flex-col gap-4 justify-center pb-4'}>
           {auth.isLoggedIn && (
             <div className={'flex gap-4'}>
-              <Button style={'edit'} size={'sm'} to={`/themes/${theme.id}`}>
+              <Button style={'edit'} size={'md'} to={`/themes/${theme.id}`}>
                 수정
               </Button>
-              <Button style={'danger'} size={'sm'} onClick={showDeleteWarningHandler}>
+              <Button style={'danger'} size={'md'} onClick={showDeleteWarningHandler}>
                 삭제
               </Button>
             </div>
