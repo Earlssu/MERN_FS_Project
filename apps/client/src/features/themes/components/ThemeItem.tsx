@@ -62,7 +62,7 @@ const ThemeItem: React.FC<{ theme: ThemeItemProps }> = ({ theme }) => {
           <img
             src={theme.imageUrl}
             alt={theme.title}
-            className={'w-full max-h-80 object-cover rounded-t-lg'}
+            className={'w-full max-h-96 object-cover rounded-t-lg'}
           />
         </div>
         <div className={'flex flex-col gap-4 p-4 w-full'}>

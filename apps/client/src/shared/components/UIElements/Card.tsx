@@ -8,7 +8,7 @@ interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const Card: React.FC<CardProps> = ({ children, className = '', ...props }) => {
   const mergedClasses = twMerge(
-    'flex flex-col gap-4 items-center bg-gray-100 px-4 py-8 border border-gray-400 rounded-lg shadow-xl',
+    'flex flex-col gap-4 items-center bg-gray-100 px-4 py-8 border border-gray-200 rounded-lg shadow-xl',
     clsx(className),
   );
 
