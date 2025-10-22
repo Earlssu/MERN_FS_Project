@@ -9,3 +9,5 @@ export type UserType = {
   lifeThemeUrl?: string;
   lastUpdated?: string;
 };
+
+export interface UserDocument extends Omit<UserType, 'id'>, Document {}
